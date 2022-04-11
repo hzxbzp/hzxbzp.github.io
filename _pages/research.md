@@ -4,8 +4,6 @@ permalink: /research/
 author_profile: true
 ---
 
-
-
 ## Temporal-Spatial Transformer for Vehicle Trajectory Prediction in Intersection Scenario  
  [paper] (under review)
 
@@ -15,7 +13,7 @@ author_profile: true
 *  Proposed a temporal-spatial transformer with a trainable reletive positional encoding block and a mask mechanism to effectively capture the features of vehicles' trajectories and interactions and accurately predict vehicle future trajectory.
 *  Conducted extensive experiments in different trajectory prediction cases against different baselines to demonstrate the effectiveness of the proposed approach..
 
-<center> <img src="https://github.com/hzxbzp/hzxbzp.github.io/blob/master/files/tst.png?raw=true" style="zoom:30%" /> </center>
+<center> <img src="https://github.com/hzxbzp/hzxbzp.github.io/blob/master/files/tst.png?raw=true" style="zoom:40%" /> </center>
 
 ## Attentive Spatio-Temporal Graph Deep Laerning for Multi-Modal Trajectory Prediction
  [paper] (under review)
