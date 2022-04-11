@@ -15,6 +15,7 @@ author_profile: true
 {% endfor %} -->
 
 You can also find more about my research on [Google Scholar](https://scholar.google.ca/citations?hl=en&user=23abK70AAAAJ) profile.
+
 (* indicate equal contribution)
 
 Journal Publications
