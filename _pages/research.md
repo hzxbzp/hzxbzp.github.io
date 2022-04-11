@@ -22,5 +22,5 @@ author_profile: true
 * Added the vectorized representations of each lane in the road map to the prediction model to realize road geometry-aware trajectory prediciton.
 * Proposed a graph neural network based prediction model with both spatial and temporal attention mechanisms and map feature extraction block to take interactions and road geometry into account when predicting vehicle trajectories.
 
-<center> <img src="https://github.com/hzxbzp/hzxbzp.github.io/blob/master/files/graph.png?raw=true" style="zoom:70%" /> </center>
+<center> <img src="https://github.com/hzxbzp/hzxbzp.github.io/blob/master/files/graph.png?raw=true" style="zoom:100%" /> </center>
 
