@@ -1,0 +1,63 @@
+en:
+  nav:
+    home: "Home"
+    about: "About"
+    portfolio: "Portfolio"
+    blog: "Blog"
+    contact: "Contact"
+  home:
+    greeting: "Hello, I'm"
+    name: "Zhipeng Bao"
+    tagline: "Exploring the intersection of AI, Robotics & Human Experience"
+    subtitle: "Engineer · Thinker · Creator"
+    cta_work: "View My Work"
+    cta_blog: "Read My Blog"
+  about:
+    title: "About Me"
+    intro: "I'm a technologist passionate about artificial intelligence, robotics, and autonomous driving — with a deep appreciation for art, philosophy, and the human side of innovation."
+  portfolio:
+    title: "Portfolio"
+    subtitle: "Selected projects and explorations"
+    view_project: "View Project"
+    tech_stack: "Tech Stack"
+  blog:
+    title: "Blog"
+    subtitle: "Reflections on technology, life, and everything in between"
+    read_more: "Read More"
+    min_read: "min read"
+    all_posts: "All Posts"
+  footer:
+    rights: "All rights reserved."
+    made_with: "Made with curiosity and warmth"
+
+zh:
+  nav:
+    home: "首页"
+    about: "关于"
+    portfolio: "作品集"
+    blog: "博客"
+    contact: "联系"
+  home:
+    greeting: "你好，我是"
+    name: "鲍志鹏"
+    tagline: "探索 AI、机器人与人文体验的交汇点"
+    subtitle: "工程师 · 思考者 · 创造者"
+    cta_work: "查看作品"
+    cta_blog: "阅读博客"
+  about:
+    title: "关于我"
+    intro: "我是一名热爱人工智能、机器人和无人驾驶的技术人，同时对艺术、哲学和创新中的人文关怀有着深深的热情。"
+  portfolio:
+    title: "作品集"
+    subtitle: "精选项目与探索"
+    view_project: "查看项目"
+    tech_stack: "技术栈"
+  blog:
+    title: "博客"
+    subtitle: "关于技术、生活，以及两者之间的思考"
+    read_more: "阅读全文"
+    min_read: "分钟阅读"
+    all_posts: "所有文章"
+  footer:
+    rights: "保留所有权利。"
+    made_with: "以好奇与温暖构建"

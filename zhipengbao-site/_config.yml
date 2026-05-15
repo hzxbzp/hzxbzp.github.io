@@ -1,0 +1,45 @@
+# Site Settings
+title: Zhipeng Bao
+description: "AI · Robotics · Autonomous Driving — Thoughts on technology and life"
+url: "https://yourusername.github.io"  # 替换为你的 GitHub 用户名
+baseurl: ""
+author: Zhipeng Bao
+
+# Build Settings
+markdown: kramdown
+highlighter: rouge
+permalink: /blog/:year/:month/:title/
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Default language
+lang: en
+
+# Collections
+collections:
+  portfolio:
+    output: true
+    permalink: /portfolio/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "portfolio"
+    values:
+      layout: "project"
+
+# Exclude
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
