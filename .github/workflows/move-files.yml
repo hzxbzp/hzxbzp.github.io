@@ -1,0 +1,31 @@
+name: Move files to root
+
+on:
+  workflow_dispatch:
+    push:
+        branches: [main]
+            paths:
+                  - '.github/workflows/move-files.yml'
+
+                  jobs:
+                    move:
+                        runs-on: ubuntu-latest
+                            permissions:
+                                  contents: write
+                                      steps:
+                                            - uses: actions/checkout@v4
+
+                                                  - name: Move files from zhipengbao-site to root
+                                                          run: |
+                                                                    cp -r zhipengbao-site/* .
+                                                                              cp -r zhipengbao-site/.* . 2>/dev/null || true
+                                                                                        rm -rf zhipengbao-site
+                                                                                                  rm -rf .github/workflows/move-files.yml
+
+                                                                                                        - name: Commit and push
+                                                                                                                run: |
+                                                                                                                          git config user.name "github-actions[bot]"
+                                                                                                                                    git config user.email "github-actions[bot]@users.noreply.github.com"
+                                                                                                                                              git add -A
+                                                                                                                                                        git commit -m "Move files from zhipengbao-site to root"
+                                                                                                                                                                  git push
