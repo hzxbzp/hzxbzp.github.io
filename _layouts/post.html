@@ -45,8 +45,8 @@ layout: default
       <h2 style="font-family: var(--font-serif); font-size: 1.4rem; margin-bottom: 1.5rem;">Comments</h2>
       <div id="waline"></div>
       <script type="module">
-        import Waline from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
-        Waline.init({
+        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+        init({
           el: '#waline',
           serverURL: 'https://waline-comment-delta-topaz.vercel.app',
           lang: '{{ lang }}',
