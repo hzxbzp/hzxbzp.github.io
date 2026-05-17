@@ -237,7 +237,7 @@ For production systems, models can be fine-tuned with **Token Internal Position 
 4. **Workarounds exist**: character separation, chain-of-thought, and code execution all help
 5. **The tokenizer is the AI's "eyes"** — its capabilities and limitations shape what the model can do
 
-The AI doesn't struggle because it's stupid. It struggles because it never saw the letters in the first place. We read text; LLMs read tokens. Until we close that gap, "understanding language" will mean fundamentally different things for humans and machines.
+<p style="font-size: 1.4em; font-style: italic; text-align: center; margin: 2rem 0;">AI doesn't misunderstand language — it never saw it the way we do.</p>
 
 ---
 
