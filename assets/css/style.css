@@ -133,13 +133,13 @@ img {
 }
 
 .logo-img {
-     height: 34px;
-     width: auto;
-     transition: opacity 0.3s ease;
+  height: 34px;
+  width: auto;
+  transition: opacity 0.3s ease;
 }
 
 .logo:hover .logo-img {
-     opacity: 0.75;
+  opacity: 0.75;
 }
 
 .logo-text {
