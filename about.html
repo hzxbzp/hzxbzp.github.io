@@ -1,0 +1,79 @@
+---
+layout: default
+lang: en
+title: About
+permalink: /about/
+---
+
+{% assign lang = page.lang | default: "en" %}
+{% assign t = site.data.translations[lang] %}
+
+<section class="about-hero">
+  <div class="container">
+    <div class="about-intro reveal">
+      <div class="about-photo">ZB</div>
+      <div class="about-text">
+        <h1>{{ t.about.title }}</h1>
+        <p>{{ t.about.intro }}</p>
+        <p>I believe technology should serve humanity with warmth — not just efficiency. My work spans the realms of artificial intelligence, robotics, and autonomous systems, but my curiosity extends to art, philosophy, and the stories that make us human.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section class="skills-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2 class="section-title">What I Do</h2>
+      <p class="section-subtitle">Areas of expertise and interest</p>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-card">
+        <div class="skill-card-icon"><i class="fas fa-brain"></i></div>
+        <h3>Artificial Intelligence</h3>
+        <p>Deep learning, computer vision, natural language processing, and the art of making machines understand our world.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon"><i class="fas fa-robot"></i></div>
+        <h3>Robotics</h3>
+        <p>From perception to planning to control — building intelligent systems that interact with the physical world.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon"><i class="fas fa-car"></i></div>
+        <h3>Autonomous Driving</h3>
+        <p>Working on the future of mobility — sensor fusion, path planning, and the complex dance of safety and autonomy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experience Timeline -->
+<section class="section">
+  <div class="container container--narrow">
+    <div class="section-header reveal">
+      <h2 class="section-title">Journey</h2>
+      <p class="section-subtitle">Where I've been and what I've learned</p>
+    </div>
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <div class="timeline-date">2024 — Present</div>
+        <div class="timeline-title">Your Current Role</div>
+        <div class="timeline-org">Company / University</div>
+        <div class="timeline-desc">Replace this with your current experience and responsibilities.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2022 — 2024</div>
+        <div class="timeline-title">Your Previous Role</div>
+        <div class="timeline-org">Company / University</div>
+        <div class="timeline-desc">Replace this with your previous experience and key achievements.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2018 — 2022</div>
+        <div class="timeline-title">Your Education</div>
+        <div class="timeline-org">University Name</div>
+        <div class="timeline-desc">Replace this with your education background and notable accomplishments.</div>
+      </div>
+    </div>
+  </div>
+</section>

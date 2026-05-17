@@ -1,0 +1,57 @@
+---
+layout: default
+lang: en
+title: Blog
+permalink: /blog/
+---
+
+{% assign lang = page.lang | default: "en" %}
+{% assign t = site.data.translations[lang] %}
+
+<section class="blog-page">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2 class="section-title">{{ t.blog.title }}</h2>
+      <p class="section-subtitle">{{ t.blog.subtitle }}</p>
+    </div>
+
+    <div class="blog-list">
+      {% for post in site.posts %}
+      <a href="{{ post.url | relative_url }}" class="blog-card reveal">
+        <div class="blog-card-image">
+          {% if post.cover_image %}
+          <img src="{{ post.cover_image | relative_url }}" alt="{{ post.title }}">
+          {% endif %}
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <time>{{ post.date | date: "%b %d, %Y" }}</time>
+            <span>
+              {% assign words = post.content | number_of_words %}
+              {% assign minutes = words | divided_by: 200 %}
+              {% if minutes < 1 %}1{% else %}{{ minutes }}{% endif %} {{ t.blog.min_read }}
+            </span>
+          </div>
+          <h3 class="blog-card-title">{{ post.title }}</h3>
+          <p class="blog-card-excerpt">{{ post.excerpt | strip_html | truncate: 180 }}</p>
+          {% if post.tags %}
+          <div class="blog-card-tags">
+            {% for tag in post.tags limit:4 %}
+            <span class="tag">{{ tag }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+
+    {% if site.posts.size == 0 %}
+    <div style="text-align: center; padding: 4rem 0; color: var(--color-text-muted);">
+      <p style="font-size: 2rem; margin-bottom: 1rem;">✍️</p>
+      <p>No posts yet. Your first story is waiting to be told.</p>
+    </div>
+    {% endif %}
+
+  </div>
+</section>

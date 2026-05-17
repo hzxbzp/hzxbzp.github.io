@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zhipeng Bao — Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header scrolled" id="site-header">
+    <div class="container">
+      <a href="#" class="logo">
+        <span class="logo-text">ZB</span>
+      </a>
+      <nav class="main-nav" id="main-nav">
+        <ul>
+          <li><a href="#hero" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#blog">Blog</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="lang-toggle">中文</button>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <p class="hero-greeting">Hello, I'm</p>
+          <h1 class="hero-name">Zhipeng Bao<span class="accent">.</span></h1>
+          <p class="hero-tagline">Exploring the intersection of AI, Robotics & Human Experience</p>
+          <p class="hero-subtitle">Engineer · Thinker · Creator</p>
+          <div class="hero-cta">
+            <a href="#portfolio" class="btn btn--primary">View My Work <span>&rarr;</span></a>
+            <a href="#blog" class="btn btn--outline">Read My Blog</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-avatar-wrapper">
+            <div class="hero-avatar-ring"></div>
+            <div class="hero-avatar">ZB</div>
+            <span class="hero-float-tag">🤖 Robotics</span>
+            <span class="hero-float-tag">🧠 AI</span>
+            <span class="hero-float-tag">🚗 Autonomous Driving</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="about-intro reveal visible">
+        <div class="about-photo">ZB</div>
+        <div class="about-text">
+          <h1>About Me</h1>
+          <p>I'm a technologist passionate about artificial intelligence, robotics, and autonomous driving — with a deep appreciation for art, philosophy, and the human side of innovation.</p>
+          <p>I believe technology should serve humanity with warmth — not just efficiency. My work spans the realms of AI, robotics, and autonomous systems, but my curiosity extends to art, philosophy, and the stories that make us human.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="skills-section">
+    <div class="container">
+      <div class="section-header reveal visible">
+        <h2 class="section-title">What I Do</h2>
+        <p class="section-subtitle">Areas of expertise and interest</p>
+      </div>
+      <div class="skills-grid reveal visible">
+        <div class="skill-card">
+          <div class="skill-card-icon"><i class="fas fa-brain"></i></div>
+          <h3>Artificial Intelligence</h3>
+          <p>Deep learning, computer vision, natural language processing, and the art of making machines understand our world.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-icon"><i class="fas fa-robot"></i></div>
+          <h3>Robotics</h3>
+          <p>From perception to planning to control — building intelligent systems that interact with the physical world.</p>
+        </div>
+        <div class="skill-card">
+          <div class="skill-card-icon"><i class="fas fa-car"></i></div>
+          <h3>Autonomous Driving</h3>
+          <p>Working on the future of mobility — sensor fusion, path planning, and the complex dance of safety and autonomy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio -->
+  <section class="section" id="portfolio" style="padding-top: calc(var(--header-height) + var(--space-xl));">
+    <div class="container">
+      <div class="section-header reveal visible">
+        <h2 class="section-title">Portfolio</h2>
+        <p class="section-subtitle">Selected projects and explorations</p>
+      </div>
+      <div class="portfolio-grid">
+        <div class="project-card reveal visible">
+          <div class="project-card-image">🤖</div>
+          <div class="project-card-body">
+            <h3 class="project-card-title">Robot Navigation System</h3>
+            <p class="project-card-desc">An autonomous navigation system using deep reinforcement learning for indoor environments.</p>
+            <div class="project-card-tags">
+              <span class="tag">Python</span><span class="tag">ROS</span><span class="tag">Deep RL</span>
+            </div>
+            <a href="#" class="project-card-link">View Project</a>
+          </div>
+        </div>
+        <div class="project-card reveal visible">
+          <div class="project-card-image">🚗</div>
+          <div class="project-card-body">
+            <h3 class="project-card-title">Autonomous Driving Pipeline</h3>
+            <p class="project-card-desc">End-to-end perception and planning system for urban autonomous driving.</p>
+            <div class="project-card-tags">
+              <span class="tag">C++</span><span class="tag">Computer Vision</span><span class="tag">LiDAR</span>
+            </div>
+            <a href="#" class="project-card-link">View Project</a>
+          </div>
+        </div>
+        <div class="project-card reveal visible">
+          <div class="project-card-image">🧠</div>
+          <div class="project-card-body">
+            <h3 class="project-card-title">AI Art Generator</h3>
+            <p class="project-card-desc">A creative tool that blends technology with artistic expression using generative models.</p>
+            <div class="project-card-tags">
+              <span class="tag">PyTorch</span><span class="tag">Diffusion Models</span><span class="tag">Creative AI</span>
+            </div>
+            <a href="#" class="project-card-link">View Project</a>
+          </div>
+        </div>
+        <div class="project-card reveal visible">
+          <div class="project-card-image">📡</div>
+          <div class="project-card-body">
+            <h3 class="project-card-title">Sensor Fusion System</h3>
+            <p class="project-card-desc">Multi-modal sensor fusion for robust environmental perception.</p>
+            <div class="project-card-tags">
+              <span class="tag">SLAM</span><span class="tag">Kalman Filter</span><span class="tag">Point Cloud</span>
+            </div>
+            <a href="#" class="project-card-link">View Project</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog -->
+  <section class="section" id="blog" style="padding-top: calc(var(--header-height) + var(--space-xl));">
+    <div class="container">
+      <div class="section-header reveal visible">
+        <h2 class="section-title">Blog</h2>
+        <p class="section-subtitle">Reflections on technology, life, and everything in between</p>
+      </div>
+      <div class="blog-list">
+        <a href="#" class="blog-card reveal visible">
+          <div class="blog-card-image"></div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              <time>May 12, 2026</time>
+              <span>3 min read</span>
+            </div>
+            <h3 class="blog-card-title">Hello World: Why I Started This Blog</h3>
+            <p class="blog-card-excerpt">Welcome to my corner of the internet. I've been thinking about starting this blog for a while. As someone working at the intersection of AI, robotics, and autonomous driving...</p>
+            <div class="blog-card-tags">
+              <span class="tag">personal</span>
+              <span class="tag">reflection</span>
+              <span class="tag">technology</span>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="blog-card reveal visible">
+          <div class="blog-card-image"></div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              <time>May 10, 2026</time>
+              <span>4 min read</span>
+            </div>
+            <h3 class="blog-card-title">The Road Ahead: Rethinking Autonomous Driving</h3>
+            <p class="blog-card-excerpt">Autonomous driving has been "five years away" for the past decade. But beyond the headlines and the hype cycles, something genuinely interesting is happening...</p>
+            <div class="blog-card-tags">
+              <span class="tag">autonomous driving</span>
+              <span class="tag">AI</span>
+              <span class="tag">future</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span class="logo-text">ZB</span>
+          <p class="footer-tagline">Made with curiosity and warmth</p>
+        </div>
+        <div class="footer-links">
+          <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Zhipeng Bao. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

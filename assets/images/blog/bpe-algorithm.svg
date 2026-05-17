@@ -1,0 +1,59 @@
+<svg viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" font-size="18" font-weight="600" fill="#2D2D2D">BPE Algorithm: How "lower" gets tokenized step by step</text>
+
+  <!-- Step 1 -->
+  <rect x="30" y="50" width="740" height="70" rx="8" fill="#F5F0EB" stroke="#ccc" stroke-width="1"/>
+  <text x="50" y="72" font-size="12" font-weight="600" fill="#D4704A">Step 1: Start with individual characters</text>
+  <rect x="50" y="82" width="30" height="30" rx="4" fill="#E8F4E8" stroke="#4A9D4A" stroke-width="1.5"/>
+  <text x="65" y="102" text-anchor="middle" font-size="14" font-family="JetBrains Mono, monospace">l</text>
+  <rect x="90" y="82" width="30" height="30" rx="4" fill="#E8F4E8" stroke="#4A9D4A" stroke-width="1.5"/>
+  <text x="105" y="102" text-anchor="middle" font-size="14" font-family="JetBrains Mono, monospace">o</text>
+  <rect x="130" y="82" width="30" height="30" rx="4" fill="#E8F4E8" stroke="#4A9D4A" stroke-width="1.5"/>
+  <text x="145" y="102" text-anchor="middle" font-size="14" font-family="JetBrains Mono, monospace">w</text>
+  <rect x="170" y="82" width="30" height="30" rx="4" fill="#E8F4E8" stroke="#4A9D4A" stroke-width="1.5"/>
+  <text x="185" y="102" text-anchor="middle" font-size="14" font-family="JetBrains Mono, monospace">e</text>
+  <rect x="210" y="82" width="30" height="30" rx="4" fill="#E8F4E8" stroke="#4A9D4A" stroke-width="1.5"/>
+  <text x="225" y="102" text-anchor="middle" font-size="14" font-family="JetBrains Mono, monospace">r</text>
+  <text x="280" y="102" font-size="12" fill="#666">← 5 tokens (one per character)</text>
+
+  <!-- Step 2 -->
+  <rect x="30" y="135" width="740" height="70" rx="8" fill="#F5F0EB" stroke="#ccc" stroke-width="1"/>
+  <text x="50" y="157" font-size="12" font-weight="600" fill="#D4704A">Step 2: Find most frequent pair → "e" + "r" (merged!)</text>
+  <rect x="50" y="167" width="30" height="30" rx="4" fill="#E8F4E8" stroke="#4A9D4A" stroke-width="1.5"/>
+  <text x="65" y="187" text-anchor="middle" font-size="14" font-family="JetBrains Mono, monospace">l</text>
+  <rect x="90" y="167" width="30" height="30" rx="4" fill="#E8F4E8" stroke="#4A9D4A" stroke-width="1.5"/>
+  <text x="105" y="187" text-anchor="middle" font-size="14" font-family="JetBrains Mono, monospace">o</text>
+  <rect x="130" y="167" width="30" height="30" rx="4" fill="#E8F4E8" stroke="#4A9D4A" stroke-width="1.5"/>
+  <text x="145" y="187" text-anchor="middle" font-size="14" font-family="JetBrains Mono, monospace">w</text>
+  <rect x="170" y="167" width="50" height="30" rx="4" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="195" y="187" text-anchor="middle" font-size="14" font-family="JetBrains Mono, monospace">er</text>
+  <text x="260" y="187" font-size="12" fill="#666">← 4 tokens now</text>
+
+  <!-- Step 3 -->
+  <rect x="30" y="220" width="740" height="70" rx="8" fill="#F5F0EB" stroke="#ccc" stroke-width="1"/>
+  <text x="50" y="242" font-size="12" font-weight="600" fill="#D4704A">Step 3: Next most frequent pair → "l" + "o" (merged!)</text>
+  <rect x="50" y="252" width="50" height="30" rx="4" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="75" y="272" text-anchor="middle" font-size="14" font-family="JetBrains Mono, monospace">lo</text>
+  <rect x="110" y="252" width="30" height="30" rx="4" fill="#E8F4E8" stroke="#4A9D4A" stroke-width="1.5"/>
+  <text x="125" y="272" text-anchor="middle" font-size="14" font-family="JetBrains Mono, monospace">w</text>
+  <rect x="150" y="252" width="50" height="30" rx="4" fill="#FFF3E0" stroke="#FF9800" stroke-width="1.5"/>
+  <text x="175" y="272" text-anchor="middle" font-size="14" font-family="JetBrains Mono, monospace">er</text>
+  <text x="240" y="272" font-size="12" fill="#666">← 3 tokens now</text>
+
+  <!-- Step 4 -->
+  <rect x="30" y="305" width="740" height="70" rx="8" fill="#F5F0EB" stroke="#ccc" stroke-width="1"/>
+  <text x="50" y="327" font-size="12" font-weight="600" fill="#D4704A">Step 4: Next merge → "lo" + "w" → "low"</text>
+  <rect x="50" y="337" width="60" height="30" rx="4" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+  <text x="80" y="357" text-anchor="middle" font-size="14" font-family="JetBrains Mono, monospace">low</text>
+  <rect x="120" y="337" width="50" height="30" rx="4" fill="#FFF3E0" stroke="#FF9800" stroke-width="1.5"/>
+  <text x="145" y="357" text-anchor="middle" font-size="14" font-family="JetBrains Mono, monospace">er</text>
+  <text x="210" y="357" font-size="12" fill="#666">← 2 tokens now</text>
+
+  <!-- Step 5 -->
+  <rect x="30" y="390" width="740" height="70" rx="8" fill="#E8F4E8" stroke="#4A9D4A" stroke-width="2"/>
+  <text x="50" y="412" font-size="12" font-weight="600" fill="#4A9D4A">Final: "low" + "er" → "lower" (if vocab allows single token)</text>
+  <rect x="50" y="422" width="80" height="30" rx="4" fill="#D4F5D4" stroke="#4A9D4A" stroke-width="2"/>
+  <text x="90" y="442" text-anchor="middle" font-size="14" font-family="JetBrains Mono, monospace">lower</text>
+  <text x="165" y="442" font-size="12" fill="#666">← 1 token! (or stays as 2, depending on vocab size)</text>
+</svg>

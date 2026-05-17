@@ -1,0 +1,30 @@
+{% assign lang = page.lang | default: "en" %}
+{% assign t = site.data.translations[lang] %}
+
+<header class="site-header" id="site-header">
+  <div class="container">
+    <a href="{{ '/' | relative_url }}" class="logo">
+      <span class="logo-text">ZB</span>
+    </a>
+
+    <nav class="main-nav" id="main-nav">
+      <ul>
+        <li><a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>{{ t.nav.home }}</a></li>
+        <li><a href="{{ '/about' | relative_url }}" {% if page.url contains 'about' %}class="active"{% endif %}>{{ t.nav.about }}</a></li>
+        <li><a href="{{ '/portfolio' | relative_url }}" {% if page.url contains 'portfolio' %}class="active"{% endif %}>{{ t.nav.portfolio }}</a></li>
+        <li><a href="{{ '/blog' | relative_url }}" {% if page.url contains 'blog' %}class="active"{% endif %}>{{ t.nav.blog }}</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button class="lang-toggle" id="lang-toggle" title="Switch Language">
+        {% if lang == 'en' %}中文{% else %}EN{% endif %}
+      </button>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
