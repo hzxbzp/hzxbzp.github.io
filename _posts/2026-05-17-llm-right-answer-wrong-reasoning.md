@@ -154,7 +154,7 @@ This is the most important mindset shift. LLM reasoning is a *starting point* fo
 4. **Chain-of-thought is powerful but imperfect** — it improves accuracy while creating a false sense of transparency
 5. **Always verify the process, not just the result** — especially for math, logic, and any high-stakes reasoning
 
-<p style="font-size: 1.4em; font-style: italic; text-align: center; margin: 2rem 0;">Fluent explanations are not faithful ones. The most dangerous hallucination isn't a wrong answer — it's a wrong answer that looks like a proof.</p>
+<p style="font-size: 1.4em; font-style: italic; text-align: center; margin: 2rem 0;">The best liars don't get the facts wrong — they get the reasoning wrong.</p>
 
 ---
 
