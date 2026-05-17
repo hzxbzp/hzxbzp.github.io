@@ -126,8 +126,20 @@ img {
   height: 100%;
 }
 
-.logo {
-  text-decoration: none;
+
+  text-decorationh: none;
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+     height: 38px;
+     width: auto;
+     transition: opacity 0.3s ease;
+}
+
+.logo:hover .logo-img {
+     opacity: 0.75;
 }
 
 .logo-text {
