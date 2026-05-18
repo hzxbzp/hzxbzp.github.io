@@ -1,0 +1,61 @@
+<svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+  <text x="400" y="28" text-anchor="middle" font-size="17" font-weight="600" fill="#2D2D2D">Prompt Engineering: From Basic to Advanced</text>
+
+  <!-- Axis line -->
+  <line x1="60" y1="380" x2="740" y2="380" stroke="#ccc" stroke-width="2"/>
+  <text x="400" y="412" text-anchor="middle" font-size="12" fill="#888">Complexity &amp; Capability →</text>
+
+  <!-- K-shot -->
+  <rect x="60" y="260" width="100" height="110" rx="8" fill="#E8F4E8" stroke="#4A9D4A" stroke-width="1.5"/>
+  <text x="110" y="285" text-anchor="middle" font-size="13" font-weight="600" fill="#2D2D2D">Few-Shot</text>
+  <text x="110" y="302" text-anchor="middle" font-size="10" fill="#666">"Here are some</text>
+  <text x="110" y="314" text-anchor="middle" font-size="10" fill="#666">examples..."</text>
+  <rect x="72" y="330" width="76" height="20" rx="10" fill="#4A9D4A" opacity="0.15"/>
+  <text x="110" y="344" text-anchor="middle" font-size="9" fill="#4A9D4A">k_shot.py</text>
+
+  <!-- CoT -->
+  <rect x="185" y="210" width="100" height="160" rx="8" fill="#FFF3E0" stroke="#FF9800" stroke-width="1.5"/>
+  <text x="235" y="235" text-anchor="middle" font-size="13" font-weight="600" fill="#2D2D2D">Chain of</text>
+  <text x="235" y="250" text-anchor="middle" font-size="13" font-weight="600" fill="#2D2D2D">Thought</text>
+  <text x="235" y="270" text-anchor="middle" font-size="10" fill="#666">"Think step</text>
+  <text x="235" y="282" text-anchor="middle" font-size="10" fill="#666">by step..."</text>
+  <rect x="197" y="330" width="76" height="20" rx="10" fill="#FF9800" opacity="0.15"/>
+  <text x="235" y="344" text-anchor="middle" font-size="9" fill="#FF9800">chain_of_thought.py</text>
+
+  <!-- Self-Consistency -->
+  <rect x="310" y="160" width="100" height="210" rx="8" fill="#E8E4F8" stroke="#6B4AD4" stroke-width="1.5"/>
+  <text x="360" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="#2D2D2D">Self-</text>
+  <text x="360" y="200" text-anchor="middle" font-size="13" font-weight="600" fill="#2D2D2D">Consistency</text>
+  <text x="360" y="222" text-anchor="middle" font-size="10" fill="#666">"Solve 3 ways,</text>
+  <text x="360" y="234" text-anchor="middle" font-size="10" fill="#666">majority vote"</text>
+  <rect x="322" y="330" width="76" height="20" rx="10" fill="#6B4AD4" opacity="0.15"/>
+  <text x="360" y="344" text-anchor="middle" font-size="9" fill="#6B4AD4">self_consistency.py</text>
+
+  <!-- RAG -->
+  <rect x="435" y="120" width="100" height="250" rx="8" fill="#E0F0FF" stroke="#2196F3" stroke-width="1.5"/>
+  <text x="485" y="145" text-anchor="middle" font-size="13" font-weight="600" fill="#2D2D2D">RAG</text>
+  <text x="485" y="170" text-anchor="middle" font-size="10" fill="#666">"Here's the</text>
+  <text x="485" y="182" text-anchor="middle" font-size="10" fill="#666">context, use</text>
+  <text x="485" y="194" text-anchor="middle" font-size="10" fill="#666">ONLY this"</text>
+  <rect x="447" y="330" width="76" height="20" rx="10" fill="#2196F3" opacity="0.15"/>
+  <text x="485" y="344" text-anchor="middle" font-size="9" fill="#2196F3">rag.py</text>
+
+  <!-- Reflexion -->
+  <rect x="560" y="80" width="100" height="290" rx="8" fill="#FFE0E0" stroke="#E53935" stroke-width="1.5"/>
+  <text x="610" y="105" text-anchor="middle" font-size="13" font-weight="600" fill="#2D2D2D">Reflexion</text>
+  <text x="610" y="130" text-anchor="middle" font-size="10" fill="#666">"Here's what</text>
+  <text x="610" y="142" text-anchor="middle" font-size="10" fill="#666">went wrong,</text>
+  <text x="610" y="154" text-anchor="middle" font-size="10" fill="#666">fix it"</text>
+  <rect x="572" y="330" width="76" height="20" rx="10" fill="#E53935" opacity="0.15"/>
+  <text x="610" y="344" text-anchor="middle" font-size="9" fill="#E53935">reflexion.py</text>
+
+  <!-- Tool Calling -->
+  <rect x="685" y="50" width="100" height="320" rx="8" fill="#FFF3F0" stroke="#D4704A" stroke-width="1.5"/>
+  <text x="735" y="75" text-anchor="middle" font-size="13" font-weight="600" fill="#2D2D2D">Tool</text>
+  <text x="735" y="90" text-anchor="middle" font-size="13" font-weight="600" fill="#2D2D2D">Calling</text>
+  <text x="735" y="115" text-anchor="middle" font-size="10" fill="#666">"Use this tool</text>
+  <text x="735" y="127" text-anchor="middle" font-size="10" fill="#666">to get real</text>
+  <text x="735" y="139" text-anchor="middle" font-size="10" fill="#666">data"</text>
+  <rect x="697" y="330" width="76" height="20" rx="10" fill="#D4704A" opacity="0.15"/>
+  <text x="735" y="344" text-anchor="middle" font-size="9" fill="#D4704A">tool_calling.py</text>
+</svg>

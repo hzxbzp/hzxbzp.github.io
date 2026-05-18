@@ -1,5 +1,5 @@
 /* ============================================
-   Zhipeng Bao â Personal Website
+   Zhipeng Bao — Personal Website
    Style: Minimal & Warm
    ============================================ */
 
@@ -387,6 +387,7 @@ img {
   justify-content: center;
   overflow: hidden;
   position: relative;
+  overflow: hidden;
 }
 
 .hero-avatar img {
@@ -1146,4 +1147,3 @@ img {
     font-size: 1.8rem;
   }
 }
-
