@@ -231,7 +231,7 @@ Want to practice prompt engineering? Here are two excellent resources:
 4. **Always verify outputs.** No technique eliminates hallucinations entirely — they just reduce the probability.
 5. **Combine techniques.** The real power comes from mixing: RAG + CoT + Tool Calling is how production AI systems work.
 
-<p style="font-size: 1.4em; font-style: italic; text-align: center; margin: 2rem 0;">An LLM doesn't find the right answer — it finds the most likely one. Your job is to make "likely" and "right" the same thing.</p>
+<p style="font-size: 1.4em; font-style: italic; text-align: center; margin: 2rem 0;">Every prompting trick is just a communication skill we forgot we already had.</p>
 
 ---
 
