@@ -129,10 +129,21 @@ Requirements:
 
 **The idea:** Let the model generate an answer, test it, show it what went wrong, and ask it to fix the code.
 
-My assignment implemented a two-pass loop: generate → test → show failures → regenerate:
+My assignment implemented a two-pass loop: generate → test → show failures → regenerate. A key detail: **the two passes use different system prompts.** The first pass gets a simple generation prompt; the reflexion pass gets a specialized correction prompt with the failure context.
+
+**Pass 1 — Initial generation** (simple, no feedback):
 
 ```python
-reflexion_prompt = """You are performing self-correction (reflexion).
+system_prompt = """You are a coding assistant. Output ONLY a single 
+fenced Python code block that defines the function 
+is_valid_password(password: str) -> bool. No prose or comments."""
+```
+
+**Pass 2 — Reflexion** (given the previous code + what went wrong):
+
+```python
+reflexion_prompt = """You are a coding assistant performing 
+self-correction (reflexion).
 
 You will be given:
 1. A previous implementation that failed some test cases.
@@ -145,7 +156,7 @@ Your job:
 - Produce a corrected implementation."""
 ```
 
-The first pass often missed edge cases. But after seeing *exactly* which tests failed and why, the second pass nailed it.
+The reflexion prompt receives the actual failing output as context — for example: `"Input: Password1 → expected True, got False. Failing checks: missing special"`. The first pass often missed edge cases. But after seeing *exactly* which tests failed and why, the second pass nailed it.
 
 **Why it works:** Reflexion mimics how humans debug: write code → run tests → read errors → fix. The model doesn't need to get it right the first time; it just needs to get it right *eventually*, guided by concrete feedback.
 
@@ -192,7 +203,7 @@ The model outputs a structured tool call; the code *actually executes* the tool 
 All six techniques address the same root problem: **LLMs are text predictors, not reasoners.** They predict the most likely next token given the context. Every prompting technique is essentially a way to *engineer the context* so that the most likely next token is also the correct one.
 
 | Technique | Core Strategy |
-|-----------|--------------|
+| :--- | :--- |
 | Few-Shot | Set up a pattern the model can continue |
 | Chain-of-Thought | Create intermediate context that guides the answer |
 | Self-Consistency | Reduce variance by aggregating multiple attempts |
