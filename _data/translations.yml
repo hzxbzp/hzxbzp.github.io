@@ -6,10 +6,10 @@ en:
     blog: "Blog"
     contact: "Contact"
   home:
-    greeting: "Hello, I'm"
+    greeting: "<|hello|> <|i_am|>"
     name: "Zhipeng Bao"
-    tagline: "Exploring the intersection of AI, Robotics & Human Experience"
-    subtitle: "Engineer · Thinker · Creator"
+    tagline: "The code runs on machines. The purpose runs on heart."
+    subtitle: "Thinker · Creator · Engineer"
     cta_work: "View My Work"
     cta_blog: "Read My Blog"
   about:
@@ -38,10 +38,10 @@ zh:
     blog: "博客"
     contact: "联系"
   home:
-    greeting: "你好，我是"
+    greeting: "<|你好|> <|我是|>"
     name: "鲍志鹏"
-    tagline: "探索 AI、机器人与人文体验的交汇点"
-    subtitle: "工程师 · 思考者 · 创造者"
+    tagline: "码动千机里，意归一寸心。"
+    subtitle: "思考者 · 创造者 · 工程师"
     cta_work: "查看作品"
     cta_blog: "阅读博客"
   about:
