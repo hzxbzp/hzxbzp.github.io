@@ -1,11 +1,11 @@
 ---
 layout: default
-lang: en
-title: Blog
-permalink: /blog/
+lang: zh
+title: 博客
+permalink: /zh/blog/
 ---
 
-{% assign lang = page.lang | default: "en" %}
+{% assign lang = page.lang | default: "zh" %}
 {% assign t = site.data.translations[lang] %}
 
 <section class="blog-page">
@@ -16,7 +16,7 @@ permalink: /blog/
     </div>
 
     <div class="blog-list">
-      {% assign filtered_posts = site.posts | where: "lang", "en" %}
+      {% assign filtered_posts = site.posts | where: "lang", "zh" %}
       {% for post in filtered_posts %}
       <a href="{{ post.url | relative_url }}" class="blog-card reveal">
         <div class="blog-card-image">
@@ -26,7 +26,7 @@ permalink: /blog/
         </div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <time>{{ post.date | date: "%b %d, %Y" }}</time>
+            <time>{{ post.date | date: "%Y年%m月%d日" }}</time>
             <span>
               {% assign words = post.content | number_of_words %}
               {% assign minutes = words | divided_by: 200 %}
@@ -50,7 +50,7 @@ permalink: /blog/
     {% if filtered_posts.size == 0 %}
     <div style="text-align: center; padding: 4rem 0; color: var(--color-text-muted);">
       <p style="font-size: 2rem; margin-bottom: 1rem;">✍️</p>
-      <p>No posts yet. Your first story is waiting to be told.</p>
+      <p>还没有文章。你的第一个故事正等待被书写。</p>
     </div>
     {% endif %}
 
