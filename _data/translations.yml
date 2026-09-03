@@ -4,6 +4,7 @@ en:
     about: "About"
     portfolio: "Portfolio"
     blog: "Blog"
+    journal: "Journal"
     contact: "Contact"
   home:
     greeting: "<|hello|> <|i_am|>"
@@ -36,6 +37,7 @@ zh:
     about: "关于"
     portfolio: "作品集"
     blog: "博客"
+    journal: "纪录"
     contact: "联系"
   home:
     greeting: "<|你好|> <|我是|>"

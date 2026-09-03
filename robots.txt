@@ -1,0 +1,11 @@
+---
+permalink: /robots.txt
+sitemap: false
+---
+User-agent: *
+Disallow: /journal/
+Disallow: /zh/journal/
+Disallow: /assets/journal/
+Allow: /
+
+Sitemap: {{ site.url }}/feed.xml

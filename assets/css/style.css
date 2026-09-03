@@ -1178,3 +1178,19 @@ img {
     font-size: 1.8rem;
   }
 }
+
+/* --- Private journal nav entry --- */
+.nav-lock {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-muted) !important;
+}
+.nav-lock i { font-size: 0.72rem; }
+.nav-lock:hover { color: var(--color-accent) !important; }
+.nav-lock.active { color: var(--color-accent) !important; }
+.nav-lock-label { display: none; }
+
+@media (max-width: 768px) {
+  .nav-lock-label { display: inline; }
+}
