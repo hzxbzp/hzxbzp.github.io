@@ -1,0 +1,52 @@
+---
+layout: default
+---
+{% assign lang = page.lang | default: "en" %}
+{% assign t = site.data.translations[lang] %}
+{% if lang == 'zh' %}{% assign portfolio_url = '/zh/portfolio/' %}{% else %}{% assign portfolio_url = '/portfolio/' %}{% endif %}
+
+<article class="post-page project-page">
+  <div class="container container--narrow">
+    <a href="{{ portfolio_url | relative_url }}" class="project-back">&larr; {{ t.portfolio.all_projects }}</a>
+
+    <header class="post-header">
+      {% if page.venue %}
+      <p class="project-venue">{{ page.venue }}</p>
+      {% endif %}
+      <h1 class="post-title">{{ page.title }}</h1>
+      {% if page.subtitle %}
+      <p class="post-subtitle">{{ page.subtitle }}</p>
+      {% endif %}
+      {% if page.tags %}
+      <div class="post-tags">
+        {% for tag in page.tags %}
+        <span class="tag">{{ tag }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% if page.links %}
+      <div class="project-actions">
+        {% for link in page.links %}
+        <a href="{{ link.url }}" class="btn {% if forloop.first %}btn--primary{% else %}btn--outline{% endif %}" target="_blank" rel="noopener">
+          {% if link.icon %}<i class="{{ link.icon }}"></i>{% endif %}{{ link.label }}
+        </a>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </header>
+
+    {% if page.cover_image %}
+    <div class="post-cover project-cover">
+      <img src="{{ page.cover_image | relative_url }}" alt="{{ page.cover_alt | default: page.title }}">
+    </div>
+    {% endif %}
+
+    <div class="post-content prose">
+      {{ content }}
+    </div>
+
+    <footer class="project-footer">
+      <a href="{{ portfolio_url | relative_url }}" class="project-back">&larr; {{ t.portfolio.all_projects }}</a>
+    </footer>
+  </div>
+</article>
