@@ -45,6 +45,11 @@ So instead of grading the models, we set out to **profile** them.
 
 We then looked through two lenses. An **ordered logit model**, a statistical tool for ranked choices, shows which factors push a model toward caution or toward assertiveness. A **thematic analysis** of the explanations shows what each model pays attention to when it decides.
 
+<figure class="figure-wide">
+  <a href="/assets/images/portfolio/study-pipeline.jpg" target="_blank" rel="noopener"><img src="/assets/images/portfolio/study-pipeline.jpg" alt="The study pipeline: four driving scenarios, the contextual factors that make up each situation, prompt sets in English, French and Chinese, three large language models choosing an option and giving a justification, and the ordered logit and thematic analyses"></a>
+  <figcaption>The full pipeline from the paper: the four scenarios, the factors behind every situation, the three prompt sets, the three models, and the two analyses. Click to enlarge.</figcaption>
+</figure>
+
 ## What we found
 
 <div class="finding-grid">

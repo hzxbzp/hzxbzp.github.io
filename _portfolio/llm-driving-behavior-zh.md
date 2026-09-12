@@ -46,6 +46,11 @@ links:
 
 之后我们从两个角度来看：**有序 Logit 模型**是一种分析排序选择的统计方法，能找出哪些因素会把模型推向谨慎或激进；对模型给出的理由做**主题分析**，则能看出它们在决策时关注什么。
 
+<figure class="figure-wide">
+  <a href="/assets/images/portfolio/study-pipeline.jpg" target="_blank" rel="noopener"><img src="/assets/images/portfolio/study-pipeline.jpg" alt="研究流程图：四个驾驶场景、构成每个情境的上下文因素、英文法文中文三套提示词、三个大语言模型选出动作并给出理由，以及有序 Logit 模型和主题分析"></a>
+  <figcaption>论文中的完整流程图：四个场景、构成每个情境的因素、三套提示词、三个模型，以及两种分析方法。点击可放大。</figcaption>
+</figure>
+
 ## 我们发现了什么
 
 <div class="finding-grid">
