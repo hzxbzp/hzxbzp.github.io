@@ -510,6 +510,24 @@ img {
   margin-bottom: var(--space-lg);
 }
 
+.about-text p.about-lead {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  margin-bottom: var(--space-lg);
+  padding-left: var(--space-lg);
+  border-left: 3px solid var(--color-accent);
+}
+
+@media (max-width: 768px) {
+  .about-text p.about-lead {
+    font-size: 1.2rem;
+    padding-left: 0;
+    border-left: none;
+  }
+}
+
 /* Skills */
 .skills-section {
   padding: var(--space-2xl) 0;
