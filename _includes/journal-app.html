@@ -1,11 +1,12 @@
 <!-- ============================================
      Private Journal — client-side encrypted (AES-GCM / PBKDF2)
+     Habit tracker + pinned row + masonry timeline.
      Nothing here is readable without the passphrase.
      ============================================ -->
 
 <section class="journal-page" id="journal-app"
          data-endpoint="{{ '/assets/journal/entries.json' | relative_url }}">
-  <div class="container container--narrow">
+  <div class="container">
 
     <!-- Lock screen -->
     <div class="jr-gate" id="jr-gate">
@@ -44,17 +45,47 @@
         </div>
       </header>
 
-      <div class="jr-bar">
-        <div class="jr-search">
-          <i class="fas fa-magnifying-glass"></i>
-          <input type="text" id="jr-q" data-i18n-ph="searchPlaceholder">
-        </div>
-        <div class="jr-tags" id="jr-tagbar"></div>
-      </div>
-
       <p class="jr-dirty jr-hidden" id="jr-dirty"><i class="fas fa-circle-exclamation"></i> <span data-i18n="unsaved"></span></p>
 
-      <!-- Editor -->
+      <!-- ============ Habit tracker ============ -->
+      <section class="jr-habits" id="jr-habits">
+        <div class="jr-habits-head">
+          <div class="jr-habits-title">
+            <h2><i class="fas fa-seedling"></i> <span data-i18n="habitsTitle"></span></h2>
+            <p class="jr-habits-sub" id="jr-habits-range"></p>
+          </div>
+          <div class="jr-habits-tools">
+            <div class="jr-seg">
+              <button class="jr-seg-btn active" data-view="week" data-i18n="viewWeek"></button>
+              <button class="jr-seg-btn" data-view="month" data-i18n="viewMonth"></button>
+            </div>
+            <div class="jr-nav">
+              <button class="jr-nav-btn" id="jr-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+              <button class="jr-nav-btn" id="jr-today" data-i18n="today"></button>
+              <button class="jr-nav-btn" id="jr-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <button class="jr-btn jr-btn--sm" id="jr-habit-add"><i class="fas fa-plus"></i> <span data-i18n="addHabit"></span></button>
+          </div>
+        </div>
+
+        <!-- stat strip -->
+        <div class="jr-stats" id="jr-stats"></div>
+
+        <!-- week table -->
+        <div class="jr-table-wrap" id="jr-week-wrap">
+          <table class="jr-table" id="jr-week-table"></table>
+        </div>
+
+        <!-- month view -->
+        <div class="jr-month jr-hidden" id="jr-month"></div>
+
+        <p class="jr-habits-empty jr-hidden" id="jr-habits-empty">
+          <span data-i18n="noHabits"></span>
+          <button class="jr-link-btn" id="jr-habit-seed" data-i18n="seedHabits"></button>
+        </p>
+      </section>
+
+      <!-- Entry editor -->
       <div class="jr-editor jr-hidden" id="jr-editor">
         <div class="jr-editor-row">
           <label class="jr-field jr-field--date">
@@ -96,14 +127,24 @@
         </div>
       </div>
 
+      <!-- Pinned row -->
       <section class="jr-section jr-hidden" id="jr-pinned-wrap">
         <h2 class="jr-section-title"><i class="fas fa-thumbtack"></i> <span data-i18n="pinned"></span></h2>
-        <div class="jr-list" id="jr-pinned"></div>
+        <div class="jr-pinned-row" id="jr-pinned"></div>
       </section>
 
+      <!-- Search + tags -->
+      <div class="jr-bar">
+        <div class="jr-search">
+          <i class="fas fa-magnifying-glass"></i>
+          <input type="text" id="jr-q" data-i18n-ph="searchPlaceholder">
+        </div>
+        <div class="jr-tags" id="jr-tagbar"></div>
+      </div>
+
+      <!-- Masonry timeline -->
       <section class="jr-section">
-        <h2 class="jr-section-title jr-hidden" id="jr-timeline-title"><i class="fas fa-clock-rotate-left"></i> <span data-i18n="timeline"></span></h2>
-        <div class="jr-list" id="jr-timeline"></div>
+        <div class="jr-grid" id="jr-timeline"></div>
       </section>
 
       <p class="jr-empty jr-hidden" id="jr-empty" data-i18n="emptyState"></p>
@@ -131,7 +172,6 @@
 .jr-gate-form { display: flex; flex-direction: column; gap: var(--space-md); }
 .jr-gate-btn { justify-content: center; }
 .jr-msg { margin-top: var(--space-md); font-size: 0.88rem; min-height: 1.3em; color: var(--color-accent); }
-.jr-msg.ok { color: #3F7D58; }
 
 /* Inputs */
 .jr-input {
@@ -155,7 +195,7 @@
   padding: 9px 16px; font-family: var(--font-sans); font-size: 0.85rem; font-weight: 500;
   color: var(--color-text); background: var(--color-surface);
   border: 1.5px solid var(--color-border); border-radius: 50px;
-  transition: all var(--transition);
+  transition: all var(--transition); white-space: nowrap;
 }
 .jr-btn:hover { border-color: var(--color-accent); color: var(--color-accent); }
 .jr-btn--accent { background: var(--color-accent); border-color: var(--color-accent); color: #fff; }
@@ -163,6 +203,7 @@
 .jr-btn--ghost { border-color: transparent; color: var(--color-text-light); background: transparent; }
 .jr-btn--danger:hover { border-color: #C0503A; color: #C0503A; }
 .jr-btn--icon { padding: 9px 13px; }
+.jr-btn--sm { padding: 7px 14px; font-size: 0.8rem; }
 
 .jr-menu-wrap { position: relative; }
 .jr-menu {
@@ -177,9 +218,107 @@
 }
 .jr-menu-item:hover { background: var(--color-bg-alt); color: var(--color-accent); }
 
+.jr-dirty { font-size: 0.82rem; color: var(--color-accent); margin-bottom: var(--space-md); }
+
+/* ---------- Habit tracker ---------- */
+.jr-habits {
+  background: var(--color-surface); border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg); padding: var(--space-lg) var(--space-lg) var(--space-md);
+  box-shadow: var(--shadow-sm); margin-bottom: var(--space-2xl);
+}
+.jr-habits-head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-md); flex-wrap: wrap; margin-bottom: var(--space-lg); }
+.jr-habits-title h2 { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+.jr-habits-title h2 i { color: var(--color-accent); font-size: 0.95rem; }
+.jr-habits-sub { font-family: var(--font-mono); font-size: 0.78rem; color: var(--color-text-muted); margin-top: 4px; letter-spacing: 0.02em; }
+.jr-habits-tools { display: flex; align-items: center; gap: var(--space-sm); flex-wrap: wrap; }
+
+.jr-seg { display: inline-flex; background: var(--color-bg-alt); border-radius: 50px; padding: 3px; }
+.jr-seg-btn {
+  cursor: pointer; border: none; background: transparent; border-radius: 50px;
+  padding: 6px 16px; font-family: var(--font-sans); font-size: 0.8rem; font-weight: 500; color: var(--color-text-light);
+  transition: all var(--transition);
+}
+.jr-seg-btn.active { background: var(--color-surface); color: var(--color-accent); box-shadow: var(--shadow-sm); }
+
+.jr-nav { display: inline-flex; align-items: center; gap: 2px; }
+.jr-nav-btn {
+  cursor: pointer; background: transparent; border: 1.5px solid transparent; border-radius: 50px;
+  padding: 6px 12px; font-family: var(--font-sans); font-size: 0.8rem; color: var(--color-text-light);
+}
+.jr-nav-btn:hover { border-color: var(--color-border); color: var(--color-accent); }
+
+/* stat strip */
+.jr-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--space-md); margin-bottom: var(--space-lg); }
+.jr-stat { background: var(--color-bg-alt); border-radius: var(--radius-md); padding: var(--space-md) var(--space-lg); }
+.jr-stat-label { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 6px; }
+.jr-stat-value { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; line-height: 1.1; color: var(--color-text); }
+.jr-stat-value small { font-family: var(--font-sans); font-size: 0.8rem; font-weight: 400; color: var(--color-text-muted); margin-left: 4px; }
+.jr-stat-bar { height: 4px; border-radius: 4px; background: var(--color-border-light); margin-top: 10px; overflow: hidden; }
+.jr-stat-bar span { display: block; height: 100%; border-radius: 4px; background: var(--color-accent); transition: width var(--transition-slow); }
+
+/* week table */
+.jr-table-wrap { overflow-x: auto; }
+.jr-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.88rem; min-width: 640px; }
+.jr-table th, .jr-table td { padding: 10px 6px; text-align: center; border-bottom: 1px solid var(--color-border-light); }
+.jr-table thead th {
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--color-text-muted); padding-bottom: 12px;
+}
+.jr-table th.jr-col-name, .jr-table td.jr-col-name { text-align: left; padding-left: 4px; min-width: 150px; }
+.jr-table td.jr-col-name { font-weight: 500; color: var(--color-text); }
+.jr-table th.jr-today-col { color: var(--color-accent); }
+.jr-table td.jr-today-col { background: var(--color-accent-light); }
+.jr-table tbody tr:hover td { background: rgba(0,0,0,0.012); }
+.jr-table tbody tr:hover td.jr-today-col { background: var(--color-accent-light); }
+.jr-table .jr-row-total td { border-bottom: none; border-top: 2px solid var(--color-border); font-weight: 600; padding-top: 14px; }
+.jr-col-num { font-family: var(--font-mono); font-size: 0.85rem; color: var(--color-text-light); width: 56px; }
+.jr-col-gap { font-family: var(--font-mono); font-size: 0.85rem; width: 64px; }
+.jr-gap-neg { color: var(--color-accent); }
+.jr-gap-ok { color: #3F7D58; }
+
+.jr-tick {
+  width: 30px; height: 30px; border-radius: 9px; cursor: pointer;
+  border: 1.5px solid var(--color-border); background: var(--color-surface);
+  color: transparent; font-size: 0.8rem; line-height: 1;
+  transition: all 0.15s ease;
+}
+.jr-tick:hover { border-color: var(--color-accent); transform: scale(1.08); }
+.jr-tick.on { background: var(--color-accent); border-color: var(--color-accent); color: #fff; }
+.jr-tick.future { opacity: 0.4; cursor: default; }
+.jr-tick.future:hover { border-color: var(--color-border); transform: none; }
+
+.jr-habit-name { display: inline-flex; align-items: center; gap: 8px; }
+.jr-habit-edit {
+  opacity: 0; cursor: pointer; border: none; background: transparent; padding: 2px 4px;
+  color: var(--color-text-muted); font-size: 0.75rem; transition: opacity var(--transition);
+}
+tr:hover .jr-habit-edit { opacity: 1; }
+.jr-habit-edit:hover { color: var(--color-accent); }
+
+/* month view */
+.jr-month { display: flex; flex-direction: column; gap: var(--space-md); }
+.jr-month-row { display: grid; grid-template-columns: 170px 1fr auto; gap: var(--space-md); align-items: center; }
+.jr-month-name { font-size: 0.88rem; font-weight: 500; }
+.jr-month-name small { display: block; font-size: 0.72rem; color: var(--color-text-muted); font-weight: 400; }
+.jr-dots { display: flex; gap: 3px; flex-wrap: wrap; }
+.jr-dot-day.jr-week-end { margin-right: 9px; }
+.jr-dot-day {
+  width: 15px; height: 15px; border-radius: 4px; cursor: pointer;
+  background: var(--color-bg-alt); border: 1px solid transparent; transition: all 0.15s ease;
+}
+.jr-dot-day:hover { border-color: var(--color-accent); }
+.jr-dot-day.on { background: var(--color-accent); }
+.jr-dot-day.future { opacity: 0.45; cursor: default; }
+.jr-dot-day.today { border-color: var(--color-text); }
+.jr-month-score { font-family: var(--font-mono); font-size: 0.82rem; color: var(--color-text-light); white-space: nowrap; }
+.jr-month-legend { display: flex; align-items: center; gap: 8px; font-size: 0.75rem; color: var(--color-text-muted); margin-top: var(--space-sm); }
+
+.jr-habits-empty { text-align: center; color: var(--color-text-muted); font-size: 0.9rem; padding: var(--space-lg) 0; }
+.jr-link-btn { background: none; border: none; cursor: pointer; color: var(--color-accent); font-family: var(--font-sans); font-size: 0.9rem; text-decoration: underline; padding: 0 4px; }
+
 /* Bar */
 .jr-bar { display: flex; align-items: center; gap: var(--space-md); flex-wrap: wrap; margin-bottom: var(--space-lg); }
-.jr-search { position: relative; flex: 1 1 240px; }
+.jr-search { position: relative; flex: 1 1 240px; max-width: 380px; }
 .jr-search i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--color-text-muted); font-size: 0.85rem; }
 .jr-search input {
   width: 100%; padding: 10px 14px 10px 38px; font-family: var(--font-sans); font-size: 0.9rem;
@@ -194,8 +333,6 @@
 }
 .jr-tag-btn:hover { border-color: var(--color-accent); color: var(--color-accent); }
 .jr-tag-btn.active { background: var(--color-accent-light); border-color: transparent; color: var(--color-accent); }
-
-.jr-dirty { font-size: 0.82rem; color: var(--color-accent); margin-bottom: var(--space-md); }
 
 /* Editor */
 .jr-editor {
@@ -213,7 +350,7 @@
 .jr-check { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; color: var(--color-text-light); cursor: pointer; }
 .jr-check input { accent-color: var(--color-accent); width: 16px; height: 16px; }
 
-/* List */
+/* Sections */
 .jr-section { margin-bottom: var(--space-2xl); }
 .jr-section-title {
   display: flex; align-items: center; gap: 10px;
@@ -221,18 +358,31 @@
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-muted);
   margin-bottom: var(--space-lg);
 }
-.jr-list { display: flex; flex-direction: column; gap: var(--space-md); }
+.jr-section-title i { color: var(--color-accent); }
+
+/* Pinned: one horizontal row */
+.jr-pinned-row {
+  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(300px, 1fr);
+  align-items: start;
+  gap: var(--space-lg); overflow-x: auto; padding-bottom: var(--space-sm);
+  scroll-snap-type: x proximity;
+}
+.jr-pinned-row .jr-entry { scroll-snap-align: start; }
+
+/* Timeline: masonry */
+.jr-grid { columns: 3; column-gap: var(--space-lg); }
+.jr-grid .jr-entry { break-inside: avoid; margin-bottom: var(--space-lg); display: inline-block; width: 100%; }
 
 .jr-entry {
   position: relative; background: var(--color-surface);
   border: 1px solid var(--color-border-light); border-radius: var(--radius-md);
-  padding: var(--space-lg); transition: box-shadow var(--transition), border-color var(--transition);
+  padding: var(--space-lg); transition: box-shadow var(--transition), border-color var(--transition), transform var(--transition);
 }
-.jr-entry:hover { border-color: var(--color-border); box-shadow: var(--shadow-sm); }
-.jr-entry--pinned { border-left: 3px solid var(--color-accent); }
+.jr-entry:hover { border-color: var(--color-border); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.jr-entry--pinned { border-top: 3px solid var(--color-accent); }
 .jr-entry-head { display: flex; align-items: baseline; gap: var(--space-md); flex-wrap: wrap; margin-bottom: 6px; }
-.jr-entry-date { font-family: var(--font-mono); font-size: 0.78rem; color: var(--color-accent); letter-spacing: 0.02em; }
-.jr-entry-time { font-family: var(--font-mono); font-size: 0.78rem; color: var(--color-text-muted); }
+.jr-entry-date { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-accent); letter-spacing: 0.02em; }
+.jr-entry-time { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-text-muted); }
 .jr-entry-mood { font-size: 1rem; }
 .jr-entry-tools { margin-left: auto; display: flex; gap: 4px; opacity: 0; transition: opacity var(--transition); }
 .jr-entry:hover .jr-entry-tools, .jr-entry:focus-within .jr-entry-tools { opacity: 1; }
@@ -242,10 +392,10 @@
 }
 .jr-tool:hover { background: var(--color-bg-alt); color: var(--color-accent); }
 .jr-tool.on { color: var(--color-accent); }
-.jr-entry-title { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; line-height: 1.4; margin-bottom: var(--space-sm); }
-.jr-entry-body { font-size: 0.95rem; line-height: 1.8; color: var(--color-text); }
+.jr-entry-title { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 600; line-height: 1.4; margin-bottom: var(--space-sm); }
+.jr-entry-body { font-size: 0.92rem; line-height: 1.75; color: var(--color-text); }
 .jr-entry-body > *:not(:last-child) { margin-bottom: 0.9em; }
-.jr-entry-body h3 { font-family: var(--font-serif); font-size: 1.05rem; }
+.jr-entry-body h3, .jr-entry-body h4, .jr-entry-body h5 { font-family: var(--font-serif); font-size: 1rem; }
 .jr-entry-body ul, .jr-entry-body ol { padding-left: 1.3em; }
 .jr-entry-body li { margin-bottom: 0.3em; }
 .jr-entry-body blockquote { border-left: 3px solid var(--color-border); padding-left: 1em; color: var(--color-text-light); font-style: italic; }
@@ -256,15 +406,20 @@
 .jr-entry-body hr { border: none; border-top: 1px solid var(--color-border-light); }
 .jr-entry-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: var(--space-md); }
 .jr-entry-fold { display: inline-block; margin-top: 8px; font-size: 0.82rem; color: var(--color-accent); cursor: pointer; background: none; border: none; padding: 0; font-family: var(--font-sans); }
-.jr-clamp { max-height: 15em; overflow: hidden; -webkit-mask-image: linear-gradient(180deg, #000 68%, transparent); mask-image: linear-gradient(180deg, #000 68%, transparent); }
+.jr-clamp { max-height: 14em; overflow: hidden; -webkit-mask-image: linear-gradient(180deg, #000 66%, transparent); mask-image: linear-gradient(180deg, #000 66%, transparent); }
 
 .jr-empty { text-align: center; color: var(--color-text-muted); padding: var(--space-2xl) 0; }
 
-@media (max-width: 640px) {
+@media (max-width: 1100px) { .jr-grid { columns: 2; } }
+@media (max-width: 720px) {
+  .jr-grid { columns: 1; }
   .jr-head { flex-direction: column; }
   .jr-actions { width: 100%; }
   .jr-btn span { display: none; }
-  .jr-btn--accent span { display: inline; }
+  .jr-btn--accent span, .jr-btn--sm span { display: inline; }
+  .jr-habits { padding: var(--space-md); }
+  .jr-month-row { grid-template-columns: 1fr; gap: 6px; }
+  .jr-pinned-row { grid-auto-columns: minmax(84%, 1fr); }
 }
 </style>
 
@@ -285,7 +440,6 @@
       passPlaceholder: 'Passphrase', passPlaceholder2: 'Repeat passphrase',
       unlock: 'Unlock', create: 'Create journal',
       wrongPass: 'Wrong passphrase.', mismatch: 'The two passphrases do not match.', tooShort: 'Use at least 8 characters.',
-      loadFail: 'Could not load the journal file.',
       title: 'Journal', privateNote: 'only you can read this',
       entries: 'entries', entry: 'entry',
       newEntry: 'New entry', export: 'Export encrypted', backup: 'Download plain backup',
@@ -295,14 +449,24 @@
       fBody: 'Entry', fBodyPh: 'Write freely…', fTags: 'Tags', fTagsPh: 'comma, separated',
       fPin: 'Pin this entry', cancel: 'Cancel', delete: 'Delete', saveEntry: 'Save entry',
       editorHint: 'Markdown supported. Paste or drop an image to embed it (it stays encrypted too).',
-      pinned: 'Pinned', timeline: 'Timeline', emptyState: 'Nothing here yet. Write your first entry.',
+      pinned: 'Pinned', emptyState: 'Nothing here yet. Write your first entry.',
       confirmDelete: 'Delete this entry? This cannot be undone.',
       exported: 'Downloaded entries.json — replace assets/journal/entries.json and commit.',
       lockConfirm: 'You have unsaved changes. Lock anyway?',
       newPass: 'New passphrase (at least 8 characters):', newPass2: 'Repeat the new passphrase:',
       passChanged: 'Passphrase changed. Export the file to apply it.',
       importOk: 'Imported ', importFail: 'Could not read that file.',
-      more: 'Read more', less: 'Show less', embedding: 'Embedding image…'
+      more: 'Read more', less: 'Show less',
+      habitsTitle: 'Habits', habitCol: 'Habit', viewWeek: 'Week', viewMonth: 'Month', today: 'Today',
+      addHabit: 'Add habit', noHabits: 'No habits yet.', seedHabits: 'Start with a few examples',
+      done: 'Done', target: 'Target', gap: 'Gap', total: 'Total',
+      statDone: 'This week', statStreak: 'Best streak', statMonth: 'This month', statToday: 'Today',
+      days: 'days', dayShort: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+      habitName: 'Habit name:', habitTarget: 'Times per week (1–7):',
+      habitDelete: 'Delete this habit and all of its records?',
+      habitEditName: 'Rename (leave empty to delete):',
+      monthLegend: 'Each square is one day of the month',
+      seedList: ['Phone face down at the desk', 'Timer on before each task', 'Drink more water', 'Write one journal line']
     },
     zh: {
       gateTitle: '个人纪录', gateSub: '本栏目已加密，输入密码解锁。',
@@ -310,7 +474,6 @@
       passPlaceholder: '密码', passPlaceholder2: '再输一次密码',
       unlock: '解锁', create: '创建纪录本',
       wrongPass: '密码不正确。', mismatch: '两次输入的密码不一致。', tooShort: '密码至少 8 位。',
-      loadFail: '无法加载纪录文件。',
       title: '个人纪录', privateNote: '只有你能读到',
       entries: '条纪录', entry: '条纪录',
       newEntry: '写一条', export: '导出加密文件', backup: '下载明文备份',
@@ -320,19 +483,28 @@
       fBody: '正文', fBodyPh: '随便写点什么…', fTags: '标签', fTagsPh: '用逗号分隔',
       fPin: '置顶这条', cancel: '取消', delete: '删除', saveEntry: '保存',
       editorHint: '支持 Markdown。粘贴或拖入图片即可嵌入（图片同样会被加密）。',
-      pinned: '置顶', timeline: '时间线', emptyState: '这里还什么都没有，写下第一条吧。',
+      pinned: '置顶', emptyState: '这里还什么都没有，写下第一条吧。',
       confirmDelete: '删除这条纪录？不可撤销。',
       exported: '已下载 entries.json —— 替换 assets/journal/entries.json 后提交即可。',
       lockConfirm: '还有未保存的改动，仍要锁定吗？',
       newPass: '新密码（至少 8 位）：', newPass2: '再输一次新密码：',
       passChanged: '密码已修改，导出文件后生效。',
       importOk: '已导入 ', importFail: '无法读取该文件。',
-      more: '展开', less: '收起', embedding: '正在嵌入图片…'
+      more: '展开', less: '收起',
+      habitsTitle: '习惯追踪', habitCol: '习惯', viewWeek: '周', viewMonth: '月', today: '今天',
+      addHabit: '添加习惯', noHabits: '还没有习惯。', seedHabits: '先用几条示例开始',
+      done: '完成', target: '目标', gap: '净差', total: '总计',
+      statDone: '本周完成', statStreak: '最长连续', statMonth: '本月完成', statToday: '今日完成',
+      days: '天', dayShort: ['一','二','三','四','五','六','日'],
+      habitName: '习惯名称：', habitTarget: '每周目标次数（1–7）：',
+      habitDelete: '删除这个习惯及其全部打卡记录？',
+      habitEditName: '重命名（留空则删除）：',
+      monthLegend: '每个小方块是当月的一天',
+      seedList: ['进工作室手机倒扣', '每件事开始前计时', '多喝水', '写一条纪录']
     }
   };
   var T = STR[LANG];
 
-  // ---------- i18n ----------
   root.querySelectorAll('[data-i18n]').forEach(function (el) {
     var k = el.getAttribute('data-i18n'); if (T[k]) el.textContent = T[k];
   });
@@ -340,7 +512,7 @@
     var k = el.getAttribute('data-i18n-ph'); if (T[k]) el.setAttribute('placeholder', T[k]);
   });
 
-  // ---------- crypto helpers ----------
+  // ---------- crypto ----------
   var enc = new TextEncoder(), dec = new TextDecoder();
   function b64(buf) {
     var bytes = new Uint8Array(buf), s = '';
@@ -370,15 +542,14 @@
     });
   }
   function decryptPayload(file, pass) {
-    var salt = unb64(file.salt), iv = unb64(file.iv), ct = unb64(file.ct);
-    return deriveKey(pass, salt, file.iter || ITER).then(function (key) {
-      return crypto.subtle.decrypt({ name: 'AES-GCM', iv: iv }, key, ct);
+    return deriveKey(pass, unb64(file.salt), file.iter || ITER).then(function (key) {
+      return crypto.subtle.decrypt({ name: 'AES-GCM', iv: unb64(file.iv) }, key, unb64(file.ct));
     }).then(function (plain) { return JSON.parse(dec.decode(plain)); });
   }
 
-  // ---------- tiny markdown ----------
+  // ---------- markdown ----------
   function esc(s) {
-    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
   function inline(raw) {
     return esc(raw)
@@ -426,17 +597,29 @@
     return out.join('');
   }
 
+  // ---------- date helpers ----------
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function iso(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+  function parseISO(s) { var p = s.split('-'); return new Date(+p[0], +p[1] - 1, +p[2]); }
+  function addDays(d, n) { var x = new Date(d.getTime()); x.setDate(x.getDate() + n); return x; }
+  function mondayOf(d) {
+    var x = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    var wd = (x.getDay() + 6) % 7; // 0 = Monday
+    return addDays(x, -wd);
+  }
+  var TODAY = iso(new Date());
+
   // ---------- state ----------
-  var state = { pass: null, entries: [], dirty: false, editing: null, q: '', tag: null, isNew: false };
+  var state = {
+    pass: null, entries: [], habits: [], checks: {},
+    dirty: false, editing: null, q: '', tag: null, isNew: false,
+    view: 'week', anchor: new Date()
+  };
   var el = function (id) { return document.getElementById(id); };
   var gate = el('jr-gate'), main = el('jr-main');
 
-  function setMsg(txt, ok) {
-    var m = el('jr-gate-msg'); m.textContent = txt || ''; m.className = 'jr-msg' + (ok ? ' ok' : '');
-  }
-  function markDirty(v) {
-    state.dirty = v; el('jr-dirty').classList.toggle('jr-hidden', !v);
-  }
+  function setMsg(txt) { el('jr-gate-msg').textContent = txt || ''; }
+  function markDirty(v) { state.dirty = v; el('jr-dirty').classList.toggle('jr-hidden', !v); }
   function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
 
   // ---------- boot ----------
@@ -451,8 +634,8 @@
       if (state.isNew) {
         el('jr-gate-title').textContent = T.gateTitleNew;
         el('jr-gate-sub').textContent = T.gateSubNew;
-        el('jr-pass').setAttribute('autocomplete', 'new-password');
         el('jr-pass2').classList.remove('jr-hidden');
+        el('jr-pass').setAttribute('autocomplete', 'new-password');
       }
       el('jr-pass').focus();
     });
@@ -463,7 +646,8 @@
     if (state.isNew) {
       if (p.length < 8) return setMsg(T.tooShort);
       if (p !== el('jr-pass2').value) return setMsg(T.mismatch);
-      state.pass = p; state.entries = []; markDirty(true); openApp();
+      state.pass = p; state.entries = []; state.habits = []; state.checks = {};
+      markDirty(true); openApp();
       return;
     }
     if (!p) return;
@@ -471,6 +655,8 @@
     decryptPayload(remote, p).then(function (data) {
       state.pass = p;
       state.entries = (data && data.entries) || [];
+      state.habits = (data && data.habits) || [];
+      state.checks = (data && data.checks) || {};
       setMsg(''); openApp();
     }).catch(function () { setMsg(T.wrongPass); el('jr-pass').select(); });
   });
@@ -478,18 +664,229 @@
   function openApp() {
     el('jr-pass').value = ''; el('jr-pass2').value = '';
     gate.classList.add('jr-hidden'); main.classList.remove('jr-hidden');
-    render();
+    renderAll();
   }
   function lock(force) {
     if (state.dirty && !force && !confirm(T.lockConfirm)) return;
-    state.pass = null; state.entries = []; markDirty(false); closeEditor();
+    state.pass = null; state.entries = []; state.habits = []; state.checks = {};
+    markDirty(false); closeEditor();
     main.classList.add('jr-hidden'); gate.classList.remove('jr-hidden');
     el('jr-gate-title').textContent = T.gateTitle; el('jr-gate-sub').textContent = T.gateSub;
     el('jr-gate-btn').textContent = T.unlock; el('jr-pass2').classList.add('jr-hidden');
     state.isNew = false; setMsg(''); el('jr-pass').focus();
   }
 
-  // ---------- render ----------
+  // ================= habits =================
+  function isChecked(hid, date) {
+    var day = state.checks[date];
+    return !!(day && day.indexOf(hid) !== -1);
+  }
+  function toggleCheck(hid, date) {
+    if (date > TODAY) return;
+    var day = state.checks[date] || (state.checks[date] = []);
+    var i = day.indexOf(hid);
+    if (i === -1) day.push(hid); else day.splice(i, 1);
+    if (!day.length) delete state.checks[date];
+    markDirty(true); renderHabits();
+  }
+  function countInRange(hid, from, to) {
+    var n = 0, d = new Date(from.getTime());
+    while (iso(d) <= iso(to)) { if (isChecked(hid, iso(d))) n++; d = addDays(d, 1); }
+    return n;
+  }
+  function bestStreak(hid) {
+    var dates = Object.keys(state.checks).filter(function (d) { return isChecked(hid, d); }).sort();
+    var best = 0, cur = 0, prev = null;
+    dates.forEach(function (d) {
+      if (prev && iso(addDays(parseISO(prev), 1)) === d) cur++; else cur = 1;
+      if (cur > best) best = cur;
+      prev = d;
+    });
+    return best;
+  }
+
+  function renderStats() {
+    var wrap = el('jr-stats');
+    if (!state.habits.length) { wrap.innerHTML = ''; return; }
+    var ws = mondayOf(state.anchor), we = addDays(ws, 6);
+    var m0 = new Date(state.anchor.getFullYear(), state.anchor.getMonth(), 1);
+    var m1 = new Date(state.anchor.getFullYear(), state.anchor.getMonth() + 1, 0);
+    var mdays = m1.getDate();
+    var doneW = 0, targetW = 0, doneM = 0, targetM = 0, doneT = 0, streak = 0;
+    state.habits.forEach(function (h) {
+      doneW += countInRange(h.id, ws, we);
+      targetW += (h.target || 7);
+      doneM += countInRange(h.id, m0, m1);
+      targetM += Math.round((h.target || 7) * mdays / 7);
+      if (isChecked(h.id, TODAY)) doneT++;
+      streak = Math.max(streak, bestStreak(h.id));
+    });
+    var rateW = targetW ? Math.round(doneW * 100 / targetW) : 0;
+    var rateM = targetM ? Math.round(doneM * 100 / targetM) : 0;
+    var rateT = state.habits.length ? Math.round(doneT * 100 / state.habits.length) : 0;
+
+    function card(label, value, sub, pct) {
+      return '<div class="jr-stat"><div class="jr-stat-label">' + esc(label) + '</div>' +
+        '<div class="jr-stat-value">' + value + (sub ? '<small>' + esc(sub) + '</small>' : '') + '</div>' +
+        (pct === undefined ? '' : '<div class="jr-stat-bar"><span style="width:' + Math.min(100, pct) + '%"></span></div>') +
+        '</div>';
+    }
+    wrap.innerHTML =
+      card(T.statToday, doneT, '/ ' + state.habits.length, rateT) +
+      card(T.statDone, doneW, '/ ' + targetW + ' · ' + rateW + '%', rateW) +
+      card(T.statMonth, doneM, '/ ' + targetM + ' · ' + rateM + '%', rateM) +
+      card(T.statStreak, streak, T.days);
+  }
+
+  function renderWeek() {
+    var ws = mondayOf(state.anchor);
+    var t = el('jr-week-table');
+    var head = '<thead><tr><th class="jr-col-name">' + esc(T.habitCol) + '</th>';
+    for (var i = 0; i < 7; i++) {
+      var d = addDays(ws, i), isToday = iso(d) === TODAY;
+      head += '<th class="' + (isToday ? 'jr-today-col' : '') + '">' + T.dayShort[i] +
+              '<br><span style="font-weight:400;font-size:0.72rem;opacity:.7">' + (d.getMonth() + 1) + '/' + d.getDate() + '</span></th>';
+    }
+    head += '<th class="jr-col-num">' + esc(T.done) + '</th><th class="jr-col-num">' + esc(T.target) +
+            '</th><th class="jr-col-gap">' + esc(T.gap) + '</th></tr></thead>';
+
+    var body = '<tbody>', totDone = 0, totTarget = 0;
+    state.habits.forEach(function (h) {
+      var row = '<tr data-habit="' + h.id + '"><td class="jr-col-name"><span class="jr-habit-name">' + esc(h.name) +
+        '<button class="jr-habit-edit" data-edit="' + h.id + '" title="edit"><i class="fas fa-pen"></i></button></span></td>';
+      var done = 0;
+      for (var i = 0; i < 7; i++) {
+        var d = addDays(ws, i), ds = iso(d), on = isChecked(h.id, ds), future = ds > TODAY;
+        if (on) done++;
+        row += '<td class="' + (ds === TODAY ? 'jr-today-col' : '') + '">' +
+          '<button class="jr-tick ' + (on ? 'on ' : '') + (future ? 'future' : '') + '" data-h="' + h.id + '" data-d="' + ds + '">\u2713</button></td>';
+      }
+      var target = h.target || 7, gap = done - target;
+      totDone += done; totTarget += target;
+      row += '<td class="jr-col-num">' + done + '</td><td class="jr-col-num">' + target + '</td>' +
+        '<td class="jr-col-gap ' + (gap >= 0 ? 'jr-gap-ok' : 'jr-gap-neg') + '">' + (gap >= 0 ? '☺' : '&lt;' + Math.abs(gap) + '&gt;') + '</td></tr>';
+      body += row;
+    });
+    var totGap = totDone - totTarget;
+    body += '<tr class="jr-row-total"><td class="jr-col-name">' + esc(T.total) + '</td><td colspan="7"></td>' +
+      '<td class="jr-col-num">' + totDone + '</td><td class="jr-col-num">' + totTarget + '</td>' +
+      '<td class="jr-col-gap ' + (totGap >= 0 ? 'jr-gap-ok' : 'jr-gap-neg') + '">' + (totGap >= 0 ? '☺' : '&lt;' + Math.abs(totGap) + '&gt;') + '</td></tr></tbody>';
+    t.innerHTML = head + body;
+
+    t.querySelectorAll('.jr-tick').forEach(function (b) {
+      b.addEventListener('click', function () { toggleCheck(b.getAttribute('data-h'), b.getAttribute('data-d')); });
+    });
+    t.querySelectorAll('[data-edit]').forEach(function (b) {
+      b.addEventListener('click', function () { editHabit(b.getAttribute('data-edit')); });
+    });
+  }
+
+  function renderMonth() {
+    var y = state.anchor.getFullYear(), m = state.anchor.getMonth();
+    var days = new Date(y, m + 1, 0).getDate();
+    var wrap = el('jr-month'), html = '';
+    state.habits.forEach(function (h) {
+      var dots = '', done = 0;
+      for (var i = 1; i <= days; i++) {
+        var ds = y + '-' + pad(m + 1) + '-' + pad(i);
+        var on = isChecked(h.id, ds), future = ds > TODAY;
+        if (on) done++;
+        var wd = new Date(y, m, i).getDay();
+        dots += '<button class="jr-dot-day ' + (on ? 'on ' : '') + (future ? 'future ' : '') +
+          (ds === TODAY ? 'today ' : '') + (wd === 0 ? 'jr-week-end' : '') +
+          '" data-h="' + h.id + '" data-d="' + ds + '" title="' + ds + '"></button>';
+      }
+      var goal = Math.round((h.target || 7) * days / 7);
+      var pct = goal ? Math.round(done * 100 / goal) : 0;
+      html += '<div class="jr-month-row">' +
+        '<div class="jr-month-name">' + esc(h.name) + '<small>' + (h.target || 7) + '×/' + (LANG === 'zh' ? '周' : 'wk') + '</small></div>' +
+        '<div class="jr-dots">' + dots + '</div>' +
+        '<div class="jr-month-score">' + done + ' / ' + goal + ' · ' + pct + '%</div></div>';
+    });
+    wrap.innerHTML = html + '<p class="jr-month-legend"><span class="jr-dot-day on" style="cursor:default"></span>' + esc(T.monthLegend) + '</p>';
+    wrap.querySelectorAll('.jr-dot-day[data-h]').forEach(function (b) {
+      b.addEventListener('click', function () { toggleCheck(b.getAttribute('data-h'), b.getAttribute('data-d')); });
+    });
+  }
+
+  function renderHabits() {
+    var has = state.habits.length > 0;
+    el('jr-habits-empty').classList.toggle('jr-hidden', has);
+    el('jr-week-wrap').classList.toggle('jr-hidden', !has || state.view !== 'week');
+    el('jr-month').classList.toggle('jr-hidden', !has || state.view !== 'month');
+    var range;
+    if (state.view === 'week') {
+      var ws = mondayOf(state.anchor), we = addDays(ws, 6);
+      range = LANG === 'zh'
+        ? (ws.getMonth() + 1) + '月' + ws.getDate() + '日 — ' + (we.getMonth() + 1) + '月' + we.getDate() + '日'
+        : (ws.getMonth() + 1) + '/' + ws.getDate() + ' — ' + (we.getMonth() + 1) + '/' + we.getDate() + ', ' + we.getFullYear();
+    } else {
+      range = LANG === 'zh'
+        ? state.anchor.getFullYear() + '年' + (state.anchor.getMonth() + 1) + '月'
+        : ['January','February','March','April','May','June','July','August','September','October','November','December'][state.anchor.getMonth()] + ' ' + state.anchor.getFullYear();
+    }
+    el('jr-habits-range').textContent = range;
+    renderStats();
+    if (!has) { el('jr-week-table').innerHTML = ''; el('jr-month').innerHTML = ''; return; }
+    if (state.view === 'week') renderWeek(); else renderMonth();
+  }
+
+  function addHabit() {
+    var name = prompt(T.habitName); if (!name) return;
+    var tRaw = prompt(T.habitTarget, '7'); if (tRaw === null) return;
+    var target = Math.max(1, Math.min(7, parseInt(tRaw, 10) || 7));
+    state.habits.push({ id: uid(), name: name.trim(), target: target, created: new Date().toISOString() });
+    markDirty(true); renderHabits();
+  }
+  function editHabit(id) {
+    var h = null;
+    state.habits.forEach(function (x) { if (x.id === id) h = x; });
+    if (!h) return;
+    var name = prompt(T.habitEditName, h.name);
+    if (name === null) return;
+    if (!name.trim()) {
+      if (!confirm(T.habitDelete)) return;
+      state.habits = state.habits.filter(function (x) { return x.id !== id; });
+      Object.keys(state.checks).forEach(function (d) {
+        state.checks[d] = state.checks[d].filter(function (x) { return x !== id; });
+        if (!state.checks[d].length) delete state.checks[d];
+      });
+      markDirty(true); renderHabits(); return;
+    }
+    var tRaw = prompt(T.habitTarget, String(h.target || 7));
+    if (tRaw !== null) h.target = Math.max(1, Math.min(7, parseInt(tRaw, 10) || 7));
+    h.name = name.trim();
+    markDirty(true); renderHabits();
+  }
+
+  el('jr-habit-add').addEventListener('click', addHabit);
+  el('jr-habit-seed').addEventListener('click', function () {
+    T.seedList.forEach(function (n) {
+      state.habits.push({ id: uid(), name: n, target: 7, created: new Date().toISOString() });
+    });
+    markDirty(true); renderHabits();
+  });
+  root.querySelectorAll('.jr-seg-btn').forEach(function (b) {
+    b.addEventListener('click', function () {
+      root.querySelectorAll('.jr-seg-btn').forEach(function (x) { x.classList.remove('active'); });
+      b.classList.add('active');
+      state.view = b.getAttribute('data-view');
+      renderHabits();
+    });
+  });
+  el('jr-prev').addEventListener('click', function () {
+    state.anchor = state.view === 'week' ? addDays(state.anchor, -7)
+      : new Date(state.anchor.getFullYear(), state.anchor.getMonth() - 1, 1);
+    renderHabits();
+  });
+  el('jr-next').addEventListener('click', function () {
+    state.anchor = state.view === 'week' ? addDays(state.anchor, 7)
+      : new Date(state.anchor.getFullYear(), state.anchor.getMonth() + 1, 1);
+    renderHabits();
+  });
+  el('jr-today').addEventListener('click', function () { state.anchor = new Date(); renderHabits(); });
+
+  // ================= entries =================
   function fmtDate(d) {
     if (!d) return '';
     var parts = d.split('-'); if (parts.length !== 3) return d;
@@ -514,31 +911,31 @@
         '<button class="jr-tool' + (en.pinned ? ' on' : '') + '" data-act="pin" title="pin"><i class="fas fa-thumbtack"></i></button>' +
         '<button class="jr-tool" data-act="edit" title="edit"><i class="fas fa-pen"></i></button>' +
       '</span></div>';
-    var body = '<div class="jr-entry-body">' + md(en.body) + '</div>';
     var tags = (en.tags && en.tags.length)
       ? '<div class="jr-entry-tags">' + en.tags.map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join('') + '</div>'
       : '';
-    d.innerHTML = head + (en.title ? '<h3 class="jr-entry-title">' + esc(en.title) + '</h3>' : '') + body + tags;
+    d.innerHTML = head + (en.title ? '<h3 class="jr-entry-title">' + esc(en.title) + '</h3>' : '') +
+      '<div class="jr-entry-body">' + md(en.body) + '</div>' + tags;
     d.querySelector('[data-act="pin"]').addEventListener('click', function () {
-      en.pinned = !en.pinned; en.updated = new Date().toISOString(); markDirty(true); render();
+      en.pinned = !en.pinned; en.updated = new Date().toISOString(); markDirty(true); renderEntries();
     });
     d.querySelector('[data-act="edit"]').addEventListener('click', function () { openEditor(en); });
     var bodyEl = d.querySelector('.jr-entry-body');
     requestAnimationFrame(function () {
-      if (bodyEl.scrollHeight > 300) {
+      if (bodyEl.scrollHeight > 280) {
         bodyEl.classList.add('jr-clamp');
         var b = document.createElement('button');
         b.className = 'jr-entry-fold'; b.textContent = T.more;
         b.addEventListener('click', function () {
-          var open = bodyEl.classList.toggle('jr-clamp');
-          b.textContent = open ? T.more : T.less;
+          var closed = bodyEl.classList.toggle('jr-clamp');
+          b.textContent = closed ? T.more : T.less;
         });
         bodyEl.insertAdjacentElement('afterend', b);
       }
     });
     return d;
   }
-  function render() {
+  function renderEntries() {
     var sorted = state.entries.slice().sort(function (a, b) {
       var ka = (a.date || '') + ' ' + (a.time || ''), kb = (b.date || '') + ' ' + (b.time || '');
       return ka < kb ? 1 : ka > kb ? -1 : 0;
@@ -547,12 +944,11 @@
     var pinned = shown.filter(function (e) { return e.pinned; });
     var rest = shown.filter(function (e) { return !e.pinned; });
 
-    var pw = el('jr-pinned-wrap'), pl = el('jr-pinned'), tl = el('jr-timeline');
+    var pl = el('jr-pinned'), tl = el('jr-timeline');
     pl.innerHTML = ''; tl.innerHTML = '';
     pinned.forEach(function (e) { pl.appendChild(entryNode(e)); });
     rest.forEach(function (e) { tl.appendChild(entryNode(e)); });
-    pw.classList.toggle('jr-hidden', pinned.length === 0);
-    el('jr-timeline-title').classList.toggle('jr-hidden', pinned.length === 0 || rest.length === 0);
+    el('jr-pinned-wrap').classList.toggle('jr-hidden', pinned.length === 0);
     el('jr-empty').classList.toggle('jr-hidden', shown.length !== 0);
 
     var n = state.entries.length;
@@ -567,17 +963,17 @@
       var b = document.createElement('button');
       b.className = 'jr-tag-btn' + (state.tag === t ? ' active' : '');
       b.textContent = t;
-      b.addEventListener('click', function () { state.tag = state.tag === t ? null : t; render(); });
+      b.addEventListener('click', function () { state.tag = state.tag === t ? null : t; renderEntries(); });
       bar.appendChild(b);
     });
   }
+  function renderAll() { renderHabits(); renderEntries(); }
 
   // ---------- editor ----------
   function openEditor(en) {
     state.editing = en || null;
     var now = new Date();
-    var pad = function (n) { return (n < 10 ? '0' : '') + n; };
-    el('jr-f-date').value = en ? en.date : now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate());
+    el('jr-f-date').value = en ? en.date : iso(now);
     el('jr-f-time').value = en ? (en.time || '') : pad(now.getHours()) + ':' + pad(now.getMinutes());
     el('jr-f-mood').value = en ? (en.mood || '') : '';
     el('jr-f-title').value = en ? (en.title || '') : '';
@@ -597,7 +993,7 @@
     e.preventDefault();
     if (!state.editing || !confirm(T.confirmDelete)) return;
     state.entries = state.entries.filter(function (x) { return x !== state.editing; });
-    closeEditor(); markDirty(true); render();
+    closeEditor(); markDirty(true); renderEntries();
   });
   el('jr-commit').addEventListener('click', function (e) {
     e.preventDefault();
@@ -612,10 +1008,9 @@
     en.mood = el('jr-f-mood').value.trim();
     en.title = title; en.body = body; en.tags = tags;
     en.pinned = el('jr-f-pin').checked; en.updated = now;
-    closeEditor(); markDirty(true); render();
+    closeEditor(); markDirty(true); renderEntries();
   });
 
-  // image paste / drop -> downscaled data URI
   function embedImage(file) {
     var reader = new FileReader();
     reader.onload = function () {
@@ -648,26 +1043,27 @@
     if (f && f.type.indexOf('image/') === 0) { e.preventDefault(); embedImage(f); }
   });
 
-  // ---------- search ----------
-  el('jr-q').addEventListener('input', function () { state.q = this.value.trim(); render(); });
+  el('jr-q').addEventListener('input', function () { state.q = this.value.trim(); renderEntries(); });
 
-  // ---------- menu ----------
+  // ---------- menu / io ----------
   el('jr-more').addEventListener('click', function (e) {
     e.stopPropagation(); el('jr-menu').classList.toggle('jr-hidden');
   });
   document.addEventListener('click', function () { el('jr-menu').classList.add('jr-hidden'); });
   el('jr-menu').addEventListener('click', function (e) { e.stopPropagation(); });
 
-  function download(name, text, type) {
-    var blob = new Blob([text], { type: type || 'application/json' });
+  function download(name, text) {
+    var blob = new Blob([text], { type: 'application/json' });
     var a = document.createElement('a');
     a.href = URL.createObjectURL(blob); a.download = name;
     document.body.appendChild(a); a.click();
     setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
   }
-
+  function payload() {
+    return { entries: state.entries, habits: state.habits, checks: state.checks };
+  }
   el('jr-save').addEventListener('click', function () {
-    encryptPayload({ entries: state.entries }, state.pass).then(function (file) {
+    encryptPayload(payload(), state.pass).then(function (file) {
       download('entries.json', JSON.stringify(file));
       markDirty(false);
       alert(T.exported);
@@ -675,8 +1071,7 @@
   });
   el('jr-backup').addEventListener('click', function () {
     el('jr-menu').classList.add('jr-hidden');
-    download('journal-backup-' + new Date().toISOString().slice(0, 10) + '.json',
-      JSON.stringify({ entries: state.entries }, null, 2));
+    download('journal-backup-' + TODAY + '.json', JSON.stringify(payload(), null, 2));
   });
   el('jr-import').addEventListener('click', function () {
     el('jr-menu').classList.add('jr-hidden'); el('jr-file').click();
@@ -696,7 +1091,18 @@
           if (!e || !e.id) { e = e || {}; e.id = uid(); }
           if (!have[e.id]) { state.entries.push(e); have[e.id] = 1; added++; }
         });
-        markDirty(true); render(); alert(T.importOk + added);
+        if (j.habits && Array.isArray(j.habits)) {
+          var hh = {};
+          state.habits.forEach(function (h) { hh[h.id] = 1; });
+          j.habits.forEach(function (h) { if (h && h.id && !hh[h.id]) { state.habits.push(h); hh[h.id] = 1; } });
+        }
+        if (j.checks && typeof j.checks === 'object') {
+          Object.keys(j.checks).forEach(function (d) {
+            var cur = state.checks[d] || (state.checks[d] = []);
+            (j.checks[d] || []).forEach(function (id) { if (cur.indexOf(id) === -1) cur.push(id); });
+          });
+        }
+        markDirty(true); renderAll(); alert(T.importOk + added);
       } catch (err) { alert(T.importFail); }
     };
     fr.readAsText(f); this.value = '';
