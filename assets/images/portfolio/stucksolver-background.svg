@@ -1,0 +1,72 @@
+<svg viewBox="0 0 860 300" xmlns="http://www.w3.org/2000/svg" font-family="Inter, -apple-system, sans-serif" role="img" aria-label="An autonomous vehicle stops for a trivial obstacle; today's two ways out are a remote operator or a passenger taking the wheel, both limited; what is needed is onboard recovery or one sentence from the rider">
+  <rect width="860" height="300" fill="#FCFCFB"/>
+  <text x="14" y="24" font-size="14" font-weight="600" fill="#2D2D2D">A self-driving car stops. Now what?</text>
+
+  <!-- Panel 1: the situation -->
+  <rect x="14" y="40" width="252" height="222" rx="10" fill="#FFFFFF" stroke="#E8E4DE" stroke-width="1.5"/>
+  <text x="32" y="64" font-size="12" font-weight="600" fill="#6E7A88">THE SITUATION</text>
+
+  <!-- road scene -->
+  <rect x="32" y="80" width="216" height="62" rx="4" fill="#E6E2DC"/>
+  <line x1="32" y1="111" x2="248" y2="111" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="10 8"/>
+  <!-- stopped AV -->
+  <rect x="52" y="116" width="46" height="20" rx="5" fill="#FFFFFF" stroke="#6E7A88" stroke-width="1.5"/>
+  <circle cx="64" cy="138" r="3.5" fill="#6E7A88"/>
+  <circle cx="88" cy="138" r="3.5" fill="#6E7A88"/>
+  <!-- obstacle -->
+  <rect x="150" y="120" width="16" height="11" rx="2" fill="#E8A071"/>
+  <text x="158" y="152" font-size="9" fill="#9A9A9A" text-anchor="middle">plastic bag</text>
+  <!-- stop marker -->
+  <path d="M116 126 L140 126" stroke="#BE4F28" stroke-width="2" stroke-dasharray="4 3"/>
+  <text x="75" y="106" font-size="10" font-weight="600" fill="#BE4F28" text-anchor="middle">0 km/h</text>
+
+  <text x="32" y="176" font-size="12" fill="#2D2D2D">A bag, a broken-down car, a closed</text>
+  <text x="32" y="193" font-size="12" fill="#2D2D2D">lane. The planner finds no legal</text>
+  <text x="32" y="210" font-size="12" fill="#2D2D2D">move, so the car just waits.</text>
+  <text x="32" y="236" font-size="11" fill="#6B6B6B">One Waymo robotaxi circled a</text>
+  <text x="32" y="251" font-size="11" fill="#6B6B6B">roundabout 17 times before rescue.</text>
+
+  <path d="M276 150 L296 150" stroke="#C9C2B8" stroke-width="2" marker-end="url(#ar)"/>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#C9C2B8"/>
+    </marker>
+  </defs>
+
+  <!-- Panel 2: today's options -->
+  <rect x="306" y="40" width="252" height="222" rx="10" fill="#FFFFFF" stroke="#E8E4DE" stroke-width="1.5"/>
+  <text x="324" y="64" font-size="12" font-weight="600" fill="#6E7A88">TODAY'S TWO WAYS OUT</text>
+
+  <rect x="324" y="80" width="216" height="74" rx="8" fill="#F6F4F1"/>
+  <circle cx="346" cy="104" r="9" fill="#FFFFFF" stroke="#BE4F28" stroke-width="1.5"/>
+  <path d="M342 100 L350 108 M350 100 L342 108" stroke="#BE4F28" stroke-width="1.5"/>
+  <text x="364" y="108" font-size="12" font-weight="600" fill="#2D2D2D">Call a remote operator</text>
+  <text x="340" y="128" font-size="11" fill="#6B6B6B">Expensive to staff, and the car waits</text>
+  <text x="340" y="143" font-size="11" fill="#6B6B6B">while someone is found.</text>
+
+  <rect x="324" y="166" width="216" height="74" rx="8" fill="#F6F4F1"/>
+  <circle cx="346" cy="190" r="9" fill="#FFFFFF" stroke="#BE4F28" stroke-width="1.5"/>
+  <path d="M342 186 L350 194 M350 186 L342 194" stroke="#BE4F28" stroke-width="1.5"/>
+  <text x="364" y="194" font-size="12" font-weight="600" fill="#2D2D2D">Let the rider take over</text>
+  <text x="340" y="214" font-size="11" fill="#6B6B6B">Useless to anyone who cannot drive</text>
+  <text x="340" y="229" font-size="11" fill="#6B6B6B">— the people AVs help most.</text>
+
+  <path d="M568 150 L588 150" stroke="#C9C2B8" stroke-width="2" marker-end="url(#ar)"/>
+
+  <!-- Panel 3: what is needed -->
+  <rect x="598" y="40" width="248" height="222" rx="10" fill="#FDF4EF" stroke="#BE4F28" stroke-width="1.5"/>
+  <text x="616" y="64" font-size="12" font-weight="600" fill="#BE4F28">WHAT IS MISSING</text>
+
+  <text x="616" y="92" font-size="13" font-weight="600" fill="#2D2D2D">A way out from inside the car.</text>
+
+  <circle cx="626" cy="120" r="4" fill="#BE4F28"/>
+  <text x="640" y="124" font-size="12" fill="#2D2D2D">Notice it is stuck, and why</text>
+  <circle cx="626" cy="148" r="4" fill="#BE4F28"/>
+  <text x="640" y="152" font-size="12" fill="#2D2D2D">Work out a legal way around</text>
+  <circle cx="626" cy="176" r="4" fill="#BE4F28"/>
+  <text x="640" y="180" font-size="12" fill="#2D2D2D">Or act on one sentence from</text>
+  <text x="640" y="196" font-size="12" fill="#2D2D2D">the passenger</text>
+
+  <rect x="616" y="214" width="212" height="34" rx="8" fill="#FFFFFF" stroke="#EAD7CF" stroke-width="1"/>
+  <text x="628" y="235" font-size="11" font-style="italic" fill="#BE4F28">“It's just a bag — you can drive over it.”</text>
+</svg>

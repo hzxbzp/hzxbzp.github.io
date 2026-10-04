@@ -444,6 +444,8 @@ tr:hover .jr-habit-edit { opacity: 1; }
       entries: 'entries', entry: 'entry',
       newEntry: 'New entry', export: 'Export encrypted', backup: 'Download plain backup',
       importBackup: 'Import backup / entries', changePass: 'Change passphrase', lock: 'Lock',
+      backupWarn: 'This downloads your journal UNENCRYPTED — anyone who opens the file can read everything.\n\nKeep it OUTSIDE the website folder (never in assets/journal/, never committed to git).\n\nContinue?',
+      backupDone: 'Plain backup downloaded. Move it somewhere private — do not put it in the site folder.',
       searchPlaceholder: 'Search entries…', unsaved: 'Unsaved changes — export and commit the file to publish them.',
       fDate: 'Date', fTime: 'Time', fMood: 'Mood', fTitle: 'Title', fTitlePh: 'Optional',
       fBody: 'Entry', fBodyPh: 'Write freely…', fTags: 'Tags', fTagsPh: 'comma, separated',
@@ -478,6 +480,8 @@ tr:hover .jr-habit-edit { opacity: 1; }
       entries: '条纪录', entry: '条纪录',
       newEntry: '写一条', export: '导出加密文件', backup: '下载明文备份',
       importBackup: '导入备份 / 纪录', changePass: '修改密码', lock: '锁定',
+      backupWarn: '这会下载一份【未加密】的纪录——任何人打开文件都能读到全部内容。\n\n请把它放在网站文件夹之外（不要放进 assets/journal/，更不要提交到 git）。\n\n继续？',
+      backupDone: '明文备份已下载。请存到私密位置，不要放进站点文件夹。',
       searchPlaceholder: '搜索纪录…', unsaved: '有未保存的改动 —— 导出文件并提交后才会发布。',
       fDate: '日期', fTime: '时间', fMood: '心情', fTitle: '标题', fTitlePh: '可留空',
       fBody: '正文', fBodyPh: '随便写点什么…', fTags: '标签', fTagsPh: '用逗号分隔',
@@ -1071,7 +1075,9 @@ tr:hover .jr-habit-edit { opacity: 1; }
   });
   el('jr-backup').addEventListener('click', function () {
     el('jr-menu').classList.add('jr-hidden');
-    download('journal-backup-' + TODAY + '.json', JSON.stringify(payload(), null, 2));
+    if (!confirm(T.backupWarn)) return;
+    download('PLAINTEXT-journal-' + TODAY + '-DO-NOT-COMMIT.json', JSON.stringify(payload(), null, 2));
+    alert(T.backupDone);
   });
   el('jr-import').addEventListener('click', function () {
     el('jr-menu').classList.add('jr-hidden'); el('jr-file').click();

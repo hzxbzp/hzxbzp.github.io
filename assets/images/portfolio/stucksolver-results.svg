@@ -1,0 +1,54 @@
+<svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" font-family="Inter, -apple-system, sans-serif" role="img" aria-label="Driving Score rises from 48.7 to 65.2 and to 70.9 with passenger guidance; Success Rate rises from 18.2 percent to 36.3 and to 50.0 percent, matching the best end-to-end model">
+  <rect width="800" height="300" fill="#FCFCFB"/>
+  <text x="10" y="18" font-size="13" font-weight="600" fill="#2D2D2D">Driving Score &#8593;</text>
+  <line x1="54" y1="202.0" x2="358" y2="202.0" stroke="#E8E4DE" stroke-width="1"/>
+  <text x="46" y="206.0" font-size="10" fill="#9A9A9A" text-anchor="end">0</text>
+  <line x1="54" y1="160.0" x2="358" y2="160.0" stroke="#E8E4DE" stroke-width="1"/>
+  <text x="46" y="164.0" font-size="10" fill="#9A9A9A" text-anchor="end">20</text>
+  <line x1="54" y1="118.0" x2="358" y2="118.0" stroke="#E8E4DE" stroke-width="1"/>
+  <text x="46" y="122.0" font-size="10" fill="#9A9A9A" text-anchor="end">40</text>
+  <line x1="54" y1="76.0" x2="358" y2="76.0" stroke="#E8E4DE" stroke-width="1"/>
+  <text x="46" y="80.0" font-size="10" fill="#9A9A9A" text-anchor="end">60</text>
+  <line x1="54" y1="34.0" x2="358" y2="34.0" stroke="#E8E4DE" stroke-width="1"/>
+  <text x="46" y="38.0" font-size="10" fill="#9A9A9A" text-anchor="end">80</text>
+  <line x1="54" y1="52.1" x2="358" y2="52.1" stroke="#6E7A88" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.8"/>
+  <text x="58" y="45.1" font-size="10" fill="#6E7A88">best end-to-end model: 71.4</text>
+  <rect x="95.5" y="99.7" width="46" height="102.3" rx="4" fill="#6E7A88"/>
+  <text x="118.5" y="90.7" font-size="13" font-weight="700" fill="#2D2D2D" text-anchor="middle">48.7</text>
+  <text x="118.5" y="220.0" font-size="10" fill="#6B6B6B" text-anchor="middle">Behavior Agent</text>
+  <text x="118.5" y="233.0" font-size="10" fill="#6B6B6B" text-anchor="middle">(rule-based AV)</text>
+  <rect x="183.0" y="65.1" width="46" height="136.9" rx="4" fill="#E8A071"/>
+  <text x="206.0" y="56.1" font-size="13" font-weight="700" fill="#2D2D2D" text-anchor="middle">65.2</text>
+  <text x="206.0" y="220.0" font-size="10" fill="#6B6B6B" text-anchor="middle">+ StuckSolver</text>
+  <rect x="270.5" y="53.1" width="46" height="148.9" rx="4" fill="#BE4F28"/>
+  <text x="293.5" y="44.1" font-size="13" font-weight="700" fill="#2D2D2D" text-anchor="middle">70.9</text>
+  <text x="293.5" y="220.0" font-size="10" fill="#6B6B6B" text-anchor="middle">+ StuckSolver</text>
+  <text x="293.5" y="233.0" font-size="10" fill="#6B6B6B" text-anchor="middle">+ passenger</text>
+  <line x1="54" y1="202" x2="358" y2="202" stroke="#C9C2B8" stroke-width="1.5"/>
+  <text x="410" y="18" font-size="13" font-weight="600" fill="#2D2D2D">Success Rate &#8593;</text>
+  <line x1="454" y1="202.0" x2="758" y2="202.0" stroke="#E8E4DE" stroke-width="1"/>
+  <text x="446" y="206.0" font-size="10" fill="#9A9A9A" text-anchor="end">0</text>
+  <line x1="454" y1="160.0" x2="758" y2="160.0" stroke="#E8E4DE" stroke-width="1"/>
+  <text x="446" y="164.0" font-size="10" fill="#9A9A9A" text-anchor="end">15</text>
+  <line x1="454" y1="118.0" x2="758" y2="118.0" stroke="#E8E4DE" stroke-width="1"/>
+  <text x="446" y="122.0" font-size="10" fill="#9A9A9A" text-anchor="end">30</text>
+  <line x1="454" y1="76.0" x2="758" y2="76.0" stroke="#E8E4DE" stroke-width="1"/>
+  <text x="446" y="80.0" font-size="10" fill="#9A9A9A" text-anchor="end">45</text>
+  <line x1="454" y1="34.0" x2="758" y2="34.0" stroke="#E8E4DE" stroke-width="1"/>
+  <text x="446" y="38.0" font-size="10" fill="#9A9A9A" text-anchor="end">60</text>
+  <line x1="454" y1="61.4" x2="758" y2="61.4" stroke="#6E7A88" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.8"/>
+  <text x="458" y="54.4" font-size="10" fill="#6E7A88">best end-to-end model: 50.2%</text>
+  <rect x="495.5" y="151.0" width="46" height="51.0" rx="4" fill="#6E7A88"/>
+  <text x="518.5" y="142.0" font-size="13" font-weight="700" fill="#2D2D2D" text-anchor="middle">18.2%</text>
+  <text x="518.5" y="220.0" font-size="10" fill="#6B6B6B" text-anchor="middle">Behavior Agent</text>
+  <text x="518.5" y="233.0" font-size="10" fill="#6B6B6B" text-anchor="middle">(rule-based AV)</text>
+  <rect x="583.0" y="100.4" width="46" height="101.6" rx="4" fill="#E8A071"/>
+  <text x="606.0" y="91.4" font-size="13" font-weight="700" fill="#2D2D2D" text-anchor="middle">36.3%</text>
+  <text x="606.0" y="220.0" font-size="10" fill="#6B6B6B" text-anchor="middle">+ StuckSolver</text>
+  <rect x="670.5" y="62.0" width="46" height="140.0" rx="4" fill="#BE4F28"/>
+  <text x="693.5" y="53.0" font-size="13" font-weight="700" fill="#2D2D2D" text-anchor="middle">50.0%</text>
+  <text x="693.5" y="220.0" font-size="10" fill="#6B6B6B" text-anchor="middle">+ StuckSolver</text>
+  <text x="693.5" y="233.0" font-size="10" fill="#6B6B6B" text-anchor="middle">+ passenger</text>
+  <line x1="454" y1="202" x2="758" y2="202" stroke="#C9C2B8" stroke-width="1.5"/>
+  <text x="400" y="294" font-size="10" fill="#9A9A9A" text-anchor="middle">Bench2Drive closed-loop evaluation in CARLA · 220 routes · dashed line = Raw2Drive, the best end-to-end model reported</text>
+</svg>

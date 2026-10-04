@@ -1,0 +1,81 @@
+<svg viewBox="0 0 860 400" xmlns="http://www.w3.org/2000/svg" font-family="Inter, -apple-system, sans-serif" role="img" aria-label="StuckSolver sits beside the vehicle's own pipeline: it reads perception, state, map and the list of allowed behaviours, reasons in three steps, and hands a behaviour plan back to planning only when the car is stuck; the passenger can add one sentence">
+  <rect width="860" height="400" fill="#FCFCFB"/>
+  <defs>
+    <marker id="a2" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#9AA3B0"/>
+    </marker>
+    <marker id="a3" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#BE4F28"/>
+    </marker>
+  </defs>
+
+  <text x="14" y="24" font-size="14" font-weight="600" fill="#2D2D2D">An add-on, not a rebuild</text>
+
+  <!-- The AV's own pipeline -->
+  <rect x="14" y="44" width="832" height="92" rx="10" fill="#FFFFFF" stroke="#E8E4DE" stroke-width="1.5"/>
+  <text x="32" y="66" font-size="11" font-weight="600" letter-spacing="0.06em" fill="#6E7A88">THE CAR'S OWN SOFTWARE — UNCHANGED</text>
+
+  <rect x="32" y="80" width="150" height="40" rx="8" fill="#EEF1F5"/>
+  <text x="107" y="105" font-size="12" fill="#2D2D2D" text-anchor="middle">Perception</text>
+  <path d="M188 100 L208 100" stroke="#9AA3B0" stroke-width="1.5" marker-end="url(#a2)"/>
+
+  <rect x="214" y="80" width="150" height="40" rx="8" fill="#EEF1F5"/>
+  <text x="289" y="105" font-size="12" fill="#2D2D2D" text-anchor="middle">Route planning</text>
+  <path d="M370 100 L390 100" stroke="#9AA3B0" stroke-width="1.5" marker-end="url(#a2)"/>
+
+  <rect x="396" y="80" width="150" height="40" rx="8" fill="#EEF1F5"/>
+  <text x="471" y="105" font-size="12" fill="#2D2D2D" text-anchor="middle">Motion planning</text>
+  <path d="M552 100 L572 100" stroke="#9AA3B0" stroke-width="1.5" marker-end="url(#a2)"/>
+
+  <rect x="578" y="80" width="130" height="40" rx="8" fill="#EEF1F5"/>
+  <text x="643" y="105" font-size="12" fill="#2D2D2D" text-anchor="middle">Control</text>
+  <path d="M714 100 L734 100" stroke="#9AA3B0" stroke-width="1.5" marker-end="url(#a2)"/>
+
+  <rect x="740" y="82" width="90" height="36" rx="8" fill="#FFFFFF" stroke="#C9C2B8" stroke-width="1.5"/>
+  <text x="785" y="105" font-size="12" fill="#6B6B6B" text-anchor="middle">the car</text>
+
+  <!-- down arrow: what StuckSolver reads -->
+  <path d="M150 140 L150 188" stroke="#9AA3B0" stroke-width="1.5" marker-end="url(#a2)"/>
+  <text x="162" y="158" font-size="11" fill="#6B6B6B">front camera image · objects and their</text>
+  <text x="162" y="173" font-size="11" fill="#6B6B6B">distance and speed · own speed and</text>
+  <text x="162" y="188" font-size="11" fill="#6B6B6B">how long it has been still · lanes · allowed moves</text>
+
+  <!-- StuckSolver box -->
+  <rect x="14" y="200" width="620" height="140" rx="10" fill="#FDF4EF" stroke="#BE4F28" stroke-width="1.5"/>
+  <text x="32" y="224" font-size="13" font-weight="700" fill="#BE4F28">StuckSolver</text>
+  <text x="112" y="224" font-size="11" fill="#9A7A6B">a language model reasoning in three steps, no training needed</text>
+
+  <rect x="32" y="238" width="180" height="82" rx="8" fill="#FFFFFF" stroke="#EAD7CF" stroke-width="1"/>
+  <text x="46" y="259" font-size="11" font-weight="600" fill="#BE4F28">1 · Look</text>
+  <text x="46" y="279" font-size="11" fill="#2D2D2D">What is ahead? Lights,</text>
+  <text x="46" y="294" font-size="11" fill="#2D2D2D">signs, people, obstacles,</text>
+  <text x="46" y="309" font-size="11" fill="#2D2D2D">how far and how fast.</text>
+
+  <rect x="224" y="238" width="180" height="82" rx="8" fill="#FFFFFF" stroke="#EAD7CF" stroke-width="1"/>
+  <text x="238" y="259" font-size="11" font-weight="600" fill="#BE4F28">2 · Diagnose</text>
+  <text x="238" y="279" font-size="11" fill="#2D2D2D">Is it actually stuck, or</text>
+  <text x="238" y="294" font-size="11" fill="#2D2D2D">just waiting at a red</text>
+  <text x="238" y="309" font-size="11" fill="#2D2D2D">light? And why?</text>
+
+  <rect x="416" y="238" width="202" height="82" rx="8" fill="#FFFFFF" stroke="#EAD7CF" stroke-width="1"/>
+  <text x="430" y="259" font-size="11" font-weight="600" fill="#BE4F28">3 · Decide</text>
+  <text x="430" y="279" font-size="11" fill="#2D2D2D">Pick a move the car is</text>
+  <text x="430" y="294" font-size="11" fill="#2D2D2D">allowed to make, plus a</text>
+  <text x="430" y="309" font-size="11" fill="#2D2D2D">reroute point if needed.</text>
+
+  <!-- passenger -->
+  <rect x="654" y="200" width="192" height="68" rx="10" fill="#FFFFFF" stroke="#E8E4DE" stroke-width="1.5"/>
+  <text x="670" y="222" font-size="11" font-weight="600" fill="#6E7A88">PASSENGER (OPTIONAL)</text>
+  <text x="670" y="244" font-size="11" font-style="italic" fill="#2D2D2D">“Exit the roundabout at</text>
+  <text x="670" y="259" font-size="11" font-style="italic" fill="#2D2D2D">the right exit.”</text>
+  <path d="M650 234 L640 234" stroke="#BE4F28" stroke-width="1.5" marker-end="url(#a3)"/>
+
+  <!-- output back into planning -->
+  <path d="M517 238 L517 142" stroke="#BE4F28" stroke-width="1.8" fill="none" marker-end="url(#a3)"/>
+  <text x="530" y="158" font-size="11" font-weight="600" fill="#BE4F28">Back to the car</text>
+  <text x="530" y="174" font-size="11" fill="#2D2D2D">stop · keep lane · follow · change</text>
+  <text x="530" y="189" font-size="11" fill="#2D2D2D">lane — and where to restart.</text>
+
+  <text x="14" y="372" font-size="11" fill="#6B6B6B">It stays silent while the car is driving normally. It wakes only when the car has been below 5 km/h for more than a second — then it</text>
+  <text x="14" y="388" font-size="11" fill="#6B6B6B">overrides that one decision and hands control straight back. Nothing inside the car's own modules is modified.</text>
+</svg>
