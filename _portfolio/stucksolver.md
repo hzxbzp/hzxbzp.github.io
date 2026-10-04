@@ -25,23 +25,21 @@ A self-driving car can handle most of a trip. What it handles badly is the rare 
 
 <figure class="figure-wide">
   <img src="/assets/images/portfolio/stucksolver-background.svg" alt="Why a stuck car is a hard problem: it stops for a trivial obstacle; today it can only call a remote operator or ask the rider to drive; what is missing is a way out from inside the car">
-  <figcaption>The gap this project fills: a car stopped by something trivial, and no good way out from inside it.</figcaption>
 </figure>
 
 Today there are two ways out, and both have a hole in them:
 
 - **Call a remote operator.** Someone, somewhere, takes over. It works, but it costs money to keep people on standby, and the car waits while one is found.
-- **Let the passenger drive.** Only possible if the passenger *can* drive — which excludes the elderly, people with disabilities, and anyone without a licence. These are exactly the people self-driving cars are supposed to serve.
+- **Let the passenger drive.** Only possible if the passenger *can* drive. That rules out older riders, riders with disabilities, and anyone without a licence — the very people who gain the most from a car that drives itself.
 
 What is missing is a third option: the car gets itself out, or the passenger helps with a sentence instead of the steering wheel.
 
 ## What we built
 
-**StuckSolver** is a language model (GPT-4o) wired into an existing self-driving stack as an **add-on**. Nothing inside the car's own perception, planning or control code changes. It reads what the car already knows and hands back a suggestion — and only when the car is actually stuck.
+**StuckSolver** is a language model wired into an existing self-driving stack as an **add-on**. Nothing inside the car's own perception, planning or control code changes. It reads what the car already knows and hands back a suggestion — and only when the car is actually stuck.
 
 <figure class="figure-wide">
   <img src="/assets/images/portfolio/stucksolver-system.svg" alt="StuckSolver sits beside the car's own pipeline: it reads the camera image, nearby objects, the car's own state, the map and the list of allowed moves, reasons in three steps, and hands a behaviour plan back to planning">
-  <figcaption>How it connects. The car's own modules are untouched; StuckSolver reads what they already produce and hands one decision back.</figcaption>
 </figure>
 
 <div class="project-stats">
@@ -70,7 +68,6 @@ We tested it in CARLA on **Bench2Drive**, a benchmark of 220 routes, each contai
 
 <figure class="figure-wide">
   <img src="/assets/images/portfolio/stucksolver-results.svg" alt="Driving Score rises from 48.7 to 65.2, and to 70.9 with passenger guidance; Success Rate rises from 18.2% to 36.3%, and to 50.0%, matching the best end-to-end model">
-  <figcaption>Results on Bench2Drive. Both charts are higher-is-better; the dashed line is the strongest end-to-end model reported on the same benchmark.</figcaption>
 </figure>
 
 Reading it in plain terms:

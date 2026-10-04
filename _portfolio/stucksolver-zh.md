@@ -26,23 +26,21 @@ links:
 
 <figure class="figure-wide">
   <img src="/assets/images/portfolio/stucksolver-background.svg" alt="为什么卡住是个难题：车被一个小障碍逼停；现在只能呼叫远程接管或者让乘客自己开；缺的是一条从车内解决的路">
-  <figcaption>这个项目要补的缺口：车被一件小事逼停，而从车内没有一条好的出路。</figcaption>
 </figure>
 
 现在只有两条出路，而且各有缺口：
 
 - **呼叫远程操作员。** 有人在远端接管。可行，但要养一支随时待命的队伍，成本很高；而且在找到人之前，车只能干等。
-- **让乘客自己开。** 前提是乘客*会开车*——这就把老人、残障人士和没有驾照的人排除在外了。而他们恰恰是自动驾驶最该服务的人。
+- **让乘客自己开。** 前提是乘客*会开车*。这就把老人、残障人士和没有驾照的人排除在外——而正是这些人，最需要一辆会自己开的车。
 
 缺的是第三条路：车自己脱困；或者乘客用一句话帮忙，而不是去握方向盘。
 
 ## 做了什么
 
-**StuckSolver** 是一个接进现有自动驾驶系统的**外挂模块**，底层用 GPT-4o。车本身的感知、规划、控制代码一行都不用改。它读车已经知道的信息，然后给出一个建议——而且只在车真的卡住时才出手。
+**StuckSolver** 是一个接进现有自动驾驶系统的**外挂模块**。车本身的感知、规划、控制代码一行都不用改。它读车已经知道的信息，然后给出一个建议——而且只在车真的卡住时才出手。
 
 <figure class="figure-wide">
   <img src="/assets/images/portfolio/stucksolver-system.svg" alt="StuckSolver 挂在车辆原有流程旁边：读取前视图像、周围物体、自车状态、地图和可用动作列表，分三步推理，再把行为决策交回规划模块">
-  <figcaption>它是怎么接进去的。车辆原有模块一律不动，StuckSolver 只读它们已经产出的信息，再交回一个决策。</figcaption>
 </figure>
 
 <div class="project-stats">
@@ -71,7 +69,6 @@ links:
 
 <figure class="figure-wide">
   <img src="/assets/images/portfolio/stucksolver-results.svg" alt="驾驶评分从 48.7 升到 65.2，有乘客提示时达到 70.9；成功率从 18.2% 升到 36.3%，有乘客提示时达到 50.0%，与最好的端到端模型持平">
-  <figcaption>Bench2Drive 上的结果。两张图都是越高越好；虚线是同一基准上最强的端到端模型。</figcaption>
 </figure>
 
 说人话：

@@ -20,11 +20,9 @@
   <path d="M116 126 L140 126" stroke="#BE4F28" stroke-width="2" stroke-dasharray="4 3"/>
   <text x="75" y="106" font-size="10" font-weight="600" fill="#BE4F28" text-anchor="middle">0 km/h</text>
 
-  <text x="32" y="176" font-size="12" fill="#2D2D2D">A bag, a broken-down car, a closed</text>
-  <text x="32" y="193" font-size="12" fill="#2D2D2D">lane. The planner finds no legal</text>
-  <text x="32" y="210" font-size="12" fill="#2D2D2D">move, so the car just waits.</text>
-  <text x="32" y="236" font-size="11" fill="#6B6B6B">One Waymo robotaxi circled a</text>
-  <text x="32" y="251" font-size="11" fill="#6B6B6B">roundabout 17 times before rescue.</text>
+  <text x="32" y="186" font-size="12" fill="#2D2D2D">A bag, a broken-down car, a closed</text>
+  <text x="32" y="205" font-size="12" fill="#2D2D2D">lane. The planner finds no legal</text>
+  <text x="32" y="224" font-size="12" fill="#2D2D2D">move, so the car just waits.</text>
 
   <path d="M276 150 L296 150" stroke="#C9C2B8" stroke-width="2" marker-end="url(#ar)"/>
   <defs>
@@ -48,8 +46,8 @@
   <circle cx="346" cy="190" r="9" fill="#FFFFFF" stroke="#BE4F28" stroke-width="1.5"/>
   <path d="M342 186 L350 194 M350 186 L342 194" stroke="#BE4F28" stroke-width="1.5"/>
   <text x="364" y="194" font-size="12" font-weight="600" fill="#2D2D2D">Let the rider take over</text>
-  <text x="340" y="214" font-size="11" fill="#6B6B6B">Useless to anyone who cannot drive</text>
-  <text x="340" y="229" font-size="11" fill="#6B6B6B">— the people AVs help most.</text>
+  <text x="340" y="214" font-size="11" fill="#6B6B6B">No help to anyone who cannot drive:</text>
+  <text x="340" y="229" font-size="11" fill="#6B6B6B">older riders, disabled riders, no licence.</text>
 
   <path d="M568 150 L588 150" stroke="#C9C2B8" stroke-width="2" marker-end="url(#ar)"/>
 
