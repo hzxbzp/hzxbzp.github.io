@@ -1,0 +1,68 @@
+<svg viewBox="0 0 1000 310" xmlns="http://www.w3.org/2000/svg" font-family="Inter, -apple-system, sans-serif" role="img" aria-label="Today's self-driving car reacts to traffic but not to the person inside, so every rider gets the same ride and nobody can help when the car is stuck; what is missing is a car that senses the rider and can be told things">
+  <rect width="1000" height="310" fill="#FCFCFB"/>
+  <defs>
+    <marker id="pa" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#C9C2B8"/>
+    </marker>
+  </defs>
+  <text x="14" y="24" font-size="14" font-weight="600" fill="#2D2D2D">The car watches the road. Nobody watches the rider.</text>
+
+  <!-- panel 1 -->
+  <rect x="14" y="40" width="300" height="240" rx="10" fill="#FFFFFF" stroke="#E8E4DE" stroke-width="1.5"/>
+  <text x="34" y="64" font-size="12" font-weight="600" fill="#6E7A88">TODAY</text>
+
+  <rect x="34" y="80" width="260" height="76" rx="8" fill="#EEF1F5"/>
+  <rect x="52" y="104" width="54" height="26" rx="6" fill="#FFFFFF" stroke="#6E7A88" stroke-width="1.5"/>
+  <circle cx="66" cy="134" r="4" fill="#6E7A88"/><circle cx="92" cy="134" r="4" fill="#6E7A88"/>
+  <path d="M116 117 L150 117" stroke="#6E7A88" stroke-width="1.5" marker-end="url(#pa)"/>
+  <text x="160" y="112" font-size="11.5" fill="#2D2D2D">reads traffic lights,</text>
+  <text x="160" y="128" font-size="11.5" fill="#2D2D2D">cars, pedestrians</text>
+
+  <circle cx="66" cy="186" r="13" fill="#FDF4EF" stroke="#BE4F28" stroke-width="1.5"/>
+  <circle cx="66" cy="182" r="4.5" fill="#BE4F28"/>
+  <path d="M59 194 a7 7 0 0 1 14 0" fill="#BE4F28"/>
+  <text x="92" y="182" font-size="12" font-weight="600" fill="#2D2D2D">The rider is cargo.</text>
+  <text x="92" y="200" font-size="11.5" fill="#6B6B6B">Nothing about them reaches</text>
+  <text x="92" y="216" font-size="11.5" fill="#6B6B6B">the driving decisions.</text>
+
+  <text x="34" y="250" font-size="11.5" fill="#6B6B6B">Whether you are late, tired or</text>
+  <text x="34" y="266" font-size="11.5" fill="#6B6B6B">nervous, you get the same ride.</text>
+
+  <path d="M324 160 L344 160" stroke="#C9C2B8" stroke-width="2" marker-end="url(#pa)"/>
+
+  <!-- panel 2 -->
+  <rect x="354" y="40" width="300" height="240" rx="10" fill="#FFFFFF" stroke="#E8E4DE" stroke-width="1.5"/>
+  <text x="374" y="64" font-size="12" font-weight="600" fill="#6E7A88">WHAT THAT COSTS</text>
+
+  <rect x="374" y="80" width="260" height="88" rx="8" fill="#F6F4F1"/>
+  <text x="392" y="104" font-size="12" font-weight="600" fill="#2D2D2D">A ride that fits nobody</text>
+  <text x="392" y="126" font-size="11.5" fill="#6B6B6B">The same braking feels reckless</text>
+  <text x="392" y="142" font-size="11.5" fill="#6B6B6B">to one rider and painfully slow</text>
+  <text x="392" y="158" font-size="11.5" fill="#6B6B6B">to the next.</text>
+
+  <rect x="374" y="180" width="260" height="88" rx="8" fill="#F6F4F1"/>
+  <text x="392" y="204" font-size="12" font-weight="600" fill="#2D2D2D">No way to help when stuck</text>
+  <text x="392" y="226" font-size="11.5" fill="#6B6B6B">You can see the obstacle is</text>
+  <text x="392" y="242" font-size="11.5" fill="#6B6B6B">harmless. The car has no way</text>
+  <text x="392" y="258" font-size="11.5" fill="#6B6B6B">to hear you say so.</text>
+
+  <path d="M664 160 L684 160" stroke="#C9C2B8" stroke-width="2" marker-end="url(#pa)"/>
+
+  <!-- panel 3 -->
+  <rect x="694" y="40" width="292" height="240" rx="10" fill="#FDF4EF" stroke="#BE4F28" stroke-width="1.5"/>
+  <text x="714" y="64" font-size="12" font-weight="600" fill="#BE4F28">WHAT IS MISSING</text>
+  <text x="714" y="92" font-size="13" font-weight="600" fill="#2D2D2D">A car that also reads the</text>
+  <text x="714" y="110" font-size="13" font-weight="600" fill="#2D2D2D">person inside.</text>
+
+  <circle cx="724" cy="138" r="4" fill="#BE4F28"/>
+  <text x="738" y="142" font-size="11.5" fill="#2D2D2D">Sense how the rider is doing —</text>
+  <text x="738" y="158" font-size="11.5" fill="#2D2D2D">face, heart rate, brain signals</text>
+
+  <circle cx="724" cy="182" r="4" fill="#BE4F28"/>
+  <text x="738" y="186" font-size="11.5" fill="#2D2D2D">Let them simply say what they</text>
+  <text x="738" y="202" font-size="11.5" fill="#2D2D2D">want, in ordinary words</text>
+
+  <circle cx="724" cy="226" r="4" fill="#BE4F28"/>
+  <text x="738" y="230" font-size="11.5" fill="#2D2D2D">Adjust the driving — but never</text>
+  <text x="738" y="246" font-size="11.5" fill="#2D2D2D">outside the legal and safe range</text>
+</svg>
