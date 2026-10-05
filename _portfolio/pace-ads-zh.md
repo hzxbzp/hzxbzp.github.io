@@ -10,6 +10,10 @@ tags: [大模型智能体, 以人为中心的自动驾驶, 自动驾驶, CARLA]
 cover_image: /assets/images/portfolio/pace-ads-cover.svg
 cover_alt: "同一个红灯下的两条速度曲线：赶时间的乘客对应晚刹车、快起步；紧张的乘客对应早减速、缓起步"
 permalink: /zh/portfolio/pace-ads/
+links:
+  - label: "阅读预印本"
+    url: "https://arxiv.org/abs/2506.11842"
+    icon: "fas fa-file-lines"
 ---
 
 两个人在不同的日子坐进同一辆无人车。一个赶飞机，一个第一次坐、心里发慌。车在红灯前的刹车方式对两人一模一样——于是两次都没对：对前者太磨蹭，对后者太猛。
@@ -103,4 +107,4 @@ permalink: /zh/portfolio/pace-ads/
 
 <p style="font-size: 1.4em; font-style: italic; text-align: center; margin: 2rem 0;">一辆分不清乘客是从容还是害怕的车，算不上真正自主——它只是孤身一人。</p>
 
-<p class="project-credit">与佐治亚大学 Wenjie Zhao、Qianwen Li 合作完成。论文已被 <em>Journal of Intelligent and Connected Vehicles</em>（2026）接收，目前尚未上线。</p>
+<p class="project-credit">与佐治亚大学 Wenjie Zhao、Qianwen Li 合作完成。论文已被 <em>Journal of Intelligent and Connected Vehicles</em>（2026）接收，期刊版本尚未上线。<br><a href="https://arxiv.org/abs/2506.11842" target="_blank" rel="noopener">在 arXiv 阅读预印本</a></p>

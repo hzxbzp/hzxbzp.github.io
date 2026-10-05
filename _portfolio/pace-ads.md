@@ -9,6 +9,10 @@ venue: "Research · Journal of Intelligent and Connected Vehicles, 2026"
 tags: [LLM Agents, Human-Centered Autonomy, Autonomous Driving, CARLA]
 cover_image: /assets/images/portfolio/pace-ads-cover.svg
 cover_alt: "Two speed traces through the same red light: a hurried rider gets late firm braking and a brisk restart, an anxious rider gets early gentle braking and a slow restart"
+links:
+  - label: "Read the preprint"
+    url: "https://arxiv.org/abs/2506.11842"
+    icon: "fas fa-file-lines"
 ---
 
 Two people get into the same robotaxi on different days. One is late for a flight. The other is a nervous first-time rider. The car brakes for a red light exactly the same way for both — and gets it wrong twice. Too slow for one, too sharp for the other.
@@ -102,4 +106,4 @@ Far from perfect — but the shape of the errors matters more than the number. N
 
 <p style="font-size: 1.4em; font-style: italic; text-align: center; margin: 2rem 0;">A car that cannot tell a calm rider from a frightened one is not fully autonomous — it is just alone.</p>
 
-<p class="project-credit">Joint work with Wenjie Zhao and Qianwen Li at the University of Georgia. Accepted by the <em>Journal of Intelligent and Connected Vehicles</em> (2026); the article is not yet online.</p>
+<p class="project-credit">Joint work with Wenjie Zhao and Qianwen Li at the University of Georgia. Accepted by the <em>Journal of Intelligent and Connected Vehicles</em> (2026); the journal version is not online yet.<br><a href="https://arxiv.org/abs/2506.11842" target="_blank" rel="noopener">Read the preprint on arXiv</a></p>
