@@ -79,12 +79,10 @@ That last point is the one we care about. A simple, interpretable, rule-based ca
 
 <figure class="figure-wide">
   <a href="/assets/images/portfolio/stucksolver-recovery.jpg" target="_blank" rel="noopener"><img src="/assets/images/portfolio/stucksolver-recovery.jpg" alt="Speed trace from the simulator: the car is driving at 20 km/h, brakes to a standstill for plastic bags in the lane, StuckSolver intervenes at about 6.6 seconds, and the car is back at 20 km/h by 14 seconds"></a>
-  <figcaption>A real run. The car is cruising at 20 km/h, brakes for plastic bags in its lane, and sits at zero. StuckSolver steps in at about 6.6 s, judges the bags harmless, and the car is back up to speed by 14 s. Click to enlarge.</figcaption>
 </figure>
 
 <figure class="figure-wide" style="max-width: 640px;">
   <a href="/assets/images/portfolio/stucksolver-reroute.jpg" target="_blank" rel="noopener"><img src="/assets/images/portfolio/stucksolver-reroute.jpg" alt="Both lanes blocked by barricades; StuckSolver decides to stop and re-plan, and the map shows the new route around the block"></a>
-  <figcaption>When there is no way through, it says so. Barricades block both lanes; StuckSolver reports that lane changing is not an option and asks for a new route — the red line is the detour it triggered. Click to enlarge.</figcaption>
 </figure>
 
 <div class="finding-grid">

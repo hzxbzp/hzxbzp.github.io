@@ -1,109 +1,81 @@
 ---
 title: "Your Ride, Your Rules"
-subtitle: "PACE-ADS: three AI agents that let a self-driving car read the road, read the person sitting in it, and drive in a way that suits them"
-description: "Self-driving cars react to traffic but treat the rider as cargo. PACE-ADS adds three agents — one watching the road, one watching the rider, one deciding — so the same junction can be taken briskly or gently, and a stuck car can be freed by a sentence."
+subtitle: "PACE-ADS — an autonomous driving framework whose decisions depend on the person in the back seat, not only on the traffic outside"
+description: "Three language-model agents read the road, read the rider, and turn both into one driving decision. The same junction gets driven briskly or gently depending on who is in the car — and a rider can free a stuck vehicle with a sentence."
 lang: en
 order: 0
 featured: true
 venue: "Research · Journal of Intelligent and Connected Vehicles, 2026"
 tags: [LLM Agents, Human-Centered Autonomy, Autonomous Driving, CARLA]
-cover_image: /assets/images/portfolio/pace-ads-cover.svg
-cover_alt: "Two speed traces through the same red light: a hurried rider gets late firm braking and a brisk restart, an anxious rider gets early gentle braking and a slow restart"
+cover_image: /assets/images/portfolio/pace-ads-framework.jpg
+cover_alt: "The PACE-ADS framework: a rider's psychological signals and spoken commands go to a psychologist agent, sensor data goes to a driver agent, and a coordinator turns both into a driving behaviour sent to the vehicle"
 links:
   - label: "Read the preprint"
     url: "https://arxiv.org/abs/2506.11842"
     icon: "fas fa-file-lines"
 ---
 
-Two people get into the same robotaxi on different days. One is late for a flight. The other is a nervous first-time rider. The car brakes for a red light exactly the same way for both — and gets it wrong twice. Too slow for one, too sharp for the other.
+An autonomous car decides how to drive from what it sees outside. PACE-ADS adds a second input: the person in the back seat.
 
-The car has no idea who is sitting in it.
+Three language-model agents sit beside the vehicle's existing software. One reads the road, one reads the rider, and a third turns both into a single driving decision — chosen from moves the vehicle already knows, and bounded by limits the rider cannot talk it past.
 
-## Why this matters
 
-Today's self-driving systems are built to watch the road. Everything they sense points outward: traffic lights, other cars, pedestrians. The person in the back seat contributes nothing to any decision.
+## Who does what
 
-<figure class="figure-wide">
-  <img src="/assets/images/portfolio/pace-ads-background.svg" alt="Today's car reacts to traffic but not to the person inside, so every rider gets the same ride and nobody can help when the car is stuck; what is missing is a car that senses the rider and can be told things">
-</figure>
+| Agent | What it takes in | What it produces |
+| --- | --- | --- |
+| Driver agent | Front and overhead camera views, plus the object list from perception | A reading of the scene: weather, signals, work zones, who is nearby and what they are about to do |
+| Psychologist | Facial expression, heart rate, EEG, and anything the rider says | The rider's state, and their instruction if they gave one |
+| Coordinator | Both of the above, plus the map and the moves currently available | One behaviour and its settings, a replanning flag, and the reason behind the choice |
 
-That costs two things. **The ride fits nobody in particular** — a single driving style, applied to everyone. And when the car gets confused and stops, **the rider has no way to help**, even when they can plainly see the obstacle is a paper bag.
+Nothing inside the vehicle's own perception, planning or control is modified. The three agents run at the slow, high-level layer, and stay silent unless the rider's state changes, the rider speaks, or the vehicle gets stuck. No agent is fine-tuned; all three run zero-shot on GPT-4o inside ROS2, driving a CARLA simulation.
 
-Both problems have the same root: there is no channel from the person to the driving.
+## The same junction, driven two ways
 
-## What we built
+![Two aerial views of the same work zone: with an impatient rider the car merges into a 1.6 metre gap, with an anxious rider it waits for more than 20 metres of clear road](/assets/images/portfolio/pace-ads-gap.jpg)
 
-**PACE-ADS** opens that channel. Three language-model agents sit beside the car's existing software — none of it is modified — and between them they turn "who is in the car and how are they doing" into an actual driving decision.
+Both cars are leaving a closed lane on the same stretch of road. The one carrying an impatient rider takes the first gap it can legally use. The one carrying an anxious rider lets the whole queue pass and merges into twenty metres of empty road.
 
-<figure class="figure-wide">
-  <img src="/assets/images/portfolio/pace-ads-system.svg" alt="Three agents beside the car's own software: a driver agent reads the road, a psychologist agent reads the rider's signals and words, and a coordinator turns both into a driving behaviour handed back to the planner">
-</figure>
+The red-light scenario shows the same pattern in numbers. Each row is the average of 30 runs, with the speed limit held at 60 km/h throughout:
 
-<div class="project-stats">
-  <div class="project-stat"><span class="project-stat-value">3</span><span class="project-stat-label">agents: road, rider, decision</span></div>
-  <div class="project-stat"><span class="project-stat-value">0</span><span class="project-stat-label">training — all of it runs zero-shot</span></div>
-  <div class="project-stat"><span class="project-stat-value">4</span><span class="project-stat-label">everyday scenarios tested</span></div>
-  <div class="project-stat"><span class="project-stat-value">30</span><span class="project-stat-label">repeat runs behind every number</span></div>
-</div>
+| Rider state | Speed after adapting | Cruise after restart | Braking | Acceleration |
+| --- | --- | --- | --- | --- |
+| Very impatient | 59.6 km/h | 55.7 km/h | 5.51 m/s² | 4.23 m/s² |
+| Impatient | 55.3 km/h | 50.1 km/h | 4.63 m/s² | 3.59 m/s² |
+| Relaxed | 40.0 km/h | 32.3 km/h | 1.02 m/s² | 2.08 m/s² |
+| Anxious | 27.1 km/h | 19.6 km/h | 0.49 m/s² | 1.86 m/s² |
+| Very anxious | 26.3 km/h | 19.3 km/h | 0.42 m/s² | 1.78 m/s² |
 
-- **The driver agent reads the road.** Not just "there is an object at 23 metres", but what kind of scene this is: weather, work zones, signal state, who is around and what they look about to do.
-- **The psychologist agent reads the rider.** It takes raw signals — facial expression, heart rate, EEG — plus anything the rider says out loud, and works out whether they are calm, anxious, or in a hurry, and what they are asking for. There is no separate emotion classifier in front of it; the agent reasons from the raw signals itself.
-- **The coordinator decides.** Safety first, then the rider. It picks one of the moves the car already knows how to make — follow, keep lane, change lane, stop — and sets how briskly to do it.
+The spread is wide, and it stops where it should. At a pedestrian crossing the most assertive setting still left 1.67 m of clearance, above the 1.5 m the system is required to keep; the most cautious left 6.04 m. A rider in a hurry buys a brisker ride, never a shorter margin.
 
-Three design choices keep it honest:
+## It stops and asks
 
-- **Personalization is bounded.** Every setting the coordinator chooses lives inside a fixed safe range tied to traffic law. A rider in a hurry can buy a brisker ride; they cannot buy a shorter gap than the rules allow.
-- **It stays out of the way.** It works at the slow, high-level layer and only wakes when the rider's state changes, the rider says something, or the car gets stuck. Real-time control never leaves the car's own software.
-- **It asks when it is unsure.** Rather than guessing, the coordinator explains what is holding the car up and puts the question to the rider.
+![The agents' exchange over two paper bags: the driver agent describes the scene, the coordinator stops and says it is unclear whether the bags can be passed safely, the rider answers that they are empty, and the coordinator resumes driving](/assets/images/portfolio/pace-ads-dialogue.jpg)
 
-## Does the ride actually change?
+Two paper bags in the lane. The driver agent describes them accurately but cannot tell what is inside, so the coordinator holds the car, states exactly what it is unsure about, and puts the question to the rider. One sentence back — *the bags are empty, keep driving* — and it resumes.
 
-We ran four everyday scenarios in CARLA — a red light, a pedestrian crossing, a work zone requiring a lane change, and ordinary car-following — under five rider states, repeating each one 30 times.
+This is the part we care about most. The rider is not pressing a button or taking the wheel; they are supplying the one piece of information the car could not get for itself. And the request is checked before it is obeyed: when an instruction contradicts what the driver agent reports, the coordinator refuses it.
 
-<figure class="figure-wide">
-  <img src="/assets/images/portfolio/pace-ads-results-personalization.svg" alt="Across five rider states the car cruises slower, stops further from pedestrians and waits for larger gaps as the rider becomes more anxious; the pedestrian clearance never drops below the 1.5 metre safety floor">
-</figure>
+## When the car cannot get itself out
 
-The pattern holds across all of it. A hurried rider gets a car that cruises near the limit, brakes late and firmly, and pulls away quickly. An anxious rider gets one that cruises at half the speed, starts braking far earlier, and leaves a much wider margin around a pedestrian. And the safety floor holds: even at its most assertive, the car never came closer to a pedestrian than the 1.5 m it is required to keep.
+![The vehicle's trajectory loops the roundabout repeatedly until the rider asks it to leave by the right exit, after which the coordinator stops, changes lane, replans and exits](/assets/images/portfolio/pace-ads-roundabout.jpg)
 
-The clearest picture is the work zone, where the car has to merge left past a closed lane:
+Three situations a conventional stack cannot talk its way out of: bags in the lane, a road closed by barricades, and a route planner that keeps circling a roundabout. Thirty runs each.
 
-<figure class="figure-wide" style="max-width: 720px;">
-  <a href="/assets/images/portfolio/pace-ads-gap.jpg" target="_blank" rel="noopener"><img src="/assets/images/portfolio/pace-ads-gap.jpg" alt="Two aerial views of the same work zone: with an impatient rider the car merges into a 1.6 metre gap; with an anxious rider it waits for more than 20 metres of clear road"></a>
-  <figcaption>Same work zone, same rules, two riders. On the left the car takes the first gap it can legally use. On the right it lets the whole queue go by. Click to enlarge.</figcaption>
-</figure>
+| | Roundabout | Road closure | Static obstacle | Overall |
+| --- | --- | --- | --- | --- |
+| CARLA Behavior Agent | 0% | 0% | 0% | 0 / 90 |
+| StuckSolver | 70.0% | 83.3% | 96.7% | 75 / 90 |
+| PACE-ADS | 93.3% | 100% | 80.0% | 82 / 90 |
 
-## And when the car gets stuck
+The baseline never recovers — not once. Splitting the reasoning across three agents helps most where the situation has to be interpreted rather than merely detected, and costs about 0.6 s of extra latency per recovery.
 
-The second half of the system is about recovery. We built three situations a conventional stack cannot talk its way out of: paper bags in the lane, a road fully closed by barricades, and a route planner that keeps looping a roundabout — the failure that stranded a Waymo robotaxi for 17 laps in San Francisco.
+The static-obstacle column moves the other way, and the reason is worth stating plainly: in those runs the coordinator declined to act on the rider's instruction to drive over the bags. Those are refusals, not failures to recover. The check that blocks an unsafe instruction will sometimes block a safe one, and we would rather report that than hide it.
 
-<figure class="figure-wide">
-  <img src="/assets/images/portfolio/pace-ads-results-recovery.svg" alt="The baseline agent recovers in none of 90 runs; StuckSolver recovers in 83.3 percent and PACE-ADS in 91.1 percent, with gains on the roundabout and road closure and a drop on static obstacles caused by refusals">
-</figure>
+## Where the limits are
 
-The baseline never gets out — not once in 90 runs. PACE-ADS recovers in 91% of them, and most of the gain comes from the two scenarios that need someone to actually interpret the situation rather than just detect objects.
+Everything here runs in CARLA, which supplies clean perception and perfect actuation; a real vehicle offers neither. The rider's emotions were injected on a schedule rather than measured from someone reacting to the car, so these runs show the system responds coherently to a given state — not that a real passenger ends up more comfortable. Tested across all 43 people in the dataset without any per-person tuning, the psychologist agent names the state correctly 64% of the time, and most of its errors sit between neighbouring intensities of the same feeling rather than flipping hurried into anxious.
 
-<figure class="figure-wide">
-  <a href="/assets/images/portfolio/pace-ads-roundabout.jpg" target="_blank" rel="noopener"><img src="/assets/images/portfolio/pace-ads-roundabout.jpg" alt="The car's trajectory loops the roundabout repeatedly until the rider says stop and exit on the right, after which the coordinator breaks the instruction into stop, lane change and cruise, replans the route and exits"></a>
-  <figcaption>The roundabout. The car circles until the rider says: "Stop! Exit the roundabout from the right exit." The coordinator breaks that sentence into stop → change lane → cruise, picks a new waypoint, and the car leaves. Click to enlarge.</figcaption>
-</figure>
-
-One result runs the other way and is worth keeping in view. On the paper-bag scenario PACE-ADS scores *lower* than our earlier system, because it sometimes refuses the rider's instruction to drive over the bags after checking it against what the driver agent sees. Those are refusals, not failures — but the same mechanism that blocks an unsafe instruction will occasionally block a safe one.
-
-## Can it read a stranger?
-
-All the driving tests used signals from one person. To see whether that transfers, we ran the psychologist agent over all 43 participants in the dataset without adapting it to anyone: **64% accuracy** at naming the rider's state.
-
-Far from perfect — but the shape of the errors matters more than the number. Nearly half the mistakes are between neighbouring intensities of the same feeling (reading "very anxious" as "anxious"), and fewer than 5% flip a hurried rider into an anxious one. So a misread usually makes the adaptation *smaller* than it should be, not backwards. Dropping EEG entirely costs only 3.7 points, which matters for a system that has to run in a real car.
-
-## What it does not solve
-
-- **It is all simulation.** CARLA gives clean perception and perfect actuation. A real car has neither.
-- **The rider's feelings were scripted.** We injected emotional signals on a schedule rather than measuring a real person reacting to the car. So these runs show the system responds coherently to a given state — not that a real passenger ends up feeling better.
-- **Five states are a tool, not a truth.** Feelings are continuous; "very anxious" and "anxious" are labels we chose to make the behaviour measurable and discussable.
-- **The safety check is reasoning, not a guarantee.** The coordinator weighs a rider's instruction against the scene, but that is a judgement, not a proof. Rider guidance is information the system considers — not an order it obeys.
-- **2.2 seconds per decision.** Fine at the slow layer, and it currently needs a remote API. Getting it on-board is the next piece of work.
-
-<p style="font-size: 1.4em; font-style: italic; text-align: center; margin: 2rem 0;">A car that cannot tell a calm rider from a frightened one is not fully autonomous — it is just alone.</p>
+The safety check is a reasoning step, not a proof. A rider's instruction is weighed against what the driver agent reports and refused when the two disagree, but an instruction that is unsafe for reasons perception never surfaces could still get through. Rider guidance is information the system considers, not an order it obeys. A full decision takes about 2.2 seconds and currently needs a remote API — fast enough for the slow layer it works at, and the next piece of work is getting it on board.
 
 <p class="project-credit">Joint work with Wenjie Zhao and Qianwen Li at the University of Georgia. Accepted by the <em>Journal of Intelligent and Connected Vehicles</em> (2026); the journal version is not online yet.<br><a href="https://arxiv.org/abs/2506.11842" target="_blank" rel="noopener">Read the preprint on arXiv</a></p>

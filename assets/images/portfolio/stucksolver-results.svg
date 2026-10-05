@@ -50,5 +50,4 @@
   <text x="693.5" y="220.0" font-size="10" fill="#6B6B6B" text-anchor="middle">+ StuckSolver</text>
   <text x="693.5" y="233.0" font-size="10" fill="#6B6B6B" text-anchor="middle">+ passenger</text>
   <line x1="454" y1="202" x2="758" y2="202" stroke="#C9C2B8" stroke-width="1.5"/>
-  <text x="400" y="294" font-size="10" fill="#9A9A9A" text-anchor="middle">Bench2Drive closed-loop evaluation in CARLA · 220 routes · dashed line = Raw2Drive, the best end-to-end model reported</text>
 </svg>

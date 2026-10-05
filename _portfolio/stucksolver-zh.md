@@ -80,12 +80,10 @@ links:
 
 <figure class="figure-wide">
   <a href="/assets/images/portfolio/stucksolver-recovery.jpg" target="_blank" rel="noopener"><img src="/assets/images/portfolio/stucksolver-recovery.jpg" alt="仿真中的速度曲线：车以 20 km/h 行驶，因车道上的塑料袋刹停，约 6.6 秒时 StuckSolver 介入，14 秒前后恢复到 20 km/h"></a>
-  <figcaption>一次真实运行。车以 20 km/h 巡航，因车道上的塑料袋刹停并停在零速。约 6.6 秒 StuckSolver 介入，判断袋子无害，14 秒前后车重新回到正常车速。点击放大。</figcaption>
 </figure>
 
 <figure class="figure-wide" style="max-width: 640px;">
   <a href="/assets/images/portfolio/stucksolver-reroute.jpg" target="_blank" rel="noopener"><img src="/assets/images/portfolio/stucksolver-reroute.jpg" alt="两条车道都被路障封死，StuckSolver 判断无法换道，要求重新规划路线，地图上红线是绕行路径"></a>
-  <figcaption>真的过不去时，它会直说。两条车道都被路障封死，StuckSolver 判断换道不可行，转而请求重新规划——红线就是它触发的绕行路径。点击放大。</figcaption>
 </figure>
 
 <div class="finding-grid">
