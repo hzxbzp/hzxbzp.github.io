@@ -6,8 +6,8 @@ lang: en
 order: 0.5
 featured: true
 venue: "Research · Under review, 2026"
-cover_image: /assets/images/portfolio/grounded-cover.jpg
-cover_alt: "A frame from the dataset: a traffic signal and three cyclists marked as the elements that decide the car's next move"
+cover_image: /assets/images/portfolio/grounded-banner.jpg
+cover_alt: "Project banner: a car on a highway with boxed vehicles and a planned path, beside icons linking grounded objects to reasoning"
 tags: [Vision-Language Models, Autonomous Driving, Dataset, Grounding]
 ---
 
@@ -73,6 +73,20 @@ Scoring how well a model points needs care, because "close enough" means somethi
 ## What it changed
 
 Eight open vision-language models were fine-tuned this way, ranging from general-purpose ones to models built specifically for driving. The direction is the same in all of them.
+
+Here is one of those models, trained on this dataset, running on two recorded drives. Everything drawn on the video is the model's own output. The numbered circles are its grounding: the elements it picked out as decision-critical and where they are. The numbers come from its reasoning, ranking how much each one matters, with #1 the most. The red line is the trajectory it predicts, drawn on the camera view and again from above in the top-right panel.
+
+<figure class="figure-wide">
+  <video class="project-video" controls muted loop playsinline preload="metadata" poster="/assets/images/portfolio/poster-grounded-pred-1.jpg">
+    <source src="/assets/video/grounded-pred-1.mp4" type="video/mp4">
+  </video>
+</figure>
+
+<figure class="figure-wide">
+  <video class="project-video" controls muted loop playsinline preload="none" poster="/assets/images/portfolio/poster-grounded-pred-2.jpg">
+    <source src="/assets/video/grounded-pred-2.mp4" type="video/mp4">
+  </video>
+</figure>
 
 Finding the elements that matter improved the most: **recall went from between 0.10 and 0.49 up to between 0.62 and 0.79**, and the type of each element was named correctly **90–98%** of the time. Explanations judged for quality rose by about **0.36 on a 0–1 scale**, and the driving rationale by about **0.31**.
 

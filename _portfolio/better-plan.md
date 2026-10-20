@@ -7,8 +7,8 @@ order: 0.4
 featured: true
 venue: "Research · Under review, 2026"
 tags: [Vision-Language Models, Autonomous Driving, Planning, Test-time Selection]
-cover_image: /assets/images/portfolio/better-plan-cover.jpg
-cover_alt: "A night intersection just after the light turns green: the selected trajectory turns left alongside the human driver's path, among sixteen grey sampled trajectories"
+cover_image: /assets/images/portfolio/better-plan-banner.jpg
+cover_alt: "Project banner: a driving view with several sampled trajectories, one highlighted, and a sample, verify, select diagram"
 ---
 
 When a driving model produces a bad plan, there are two possible reasons. It never came up with a good one, or it came up with one and didn't pick it. The usual fixes, more data, more training, a bigger model, all assume the first. This project is about the second.

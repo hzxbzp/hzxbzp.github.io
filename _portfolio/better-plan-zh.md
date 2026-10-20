@@ -7,8 +7,8 @@ order: 0.4
 featured: true
 venue: "研究项目 · 审稿中，2026"
 tags: [视觉语言模型, 自动驾驶, 轨迹规划, 测试时选择]
-cover_image: /assets/images/portfolio/better-plan-cover.jpg
-cover_alt: "夜间路口，信号灯刚变绿：被选中的轨迹和人类司机的路线一起左转，周围是十六条灰色的采样轨迹"
+cover_image: /assets/images/portfolio/better-plan-banner.jpg
+cover_alt: "项目横幅：驾驶视角下的几条采样轨迹，其中一条被高亮，旁边是采样、检查、挑选三步示意"
 permalink: /zh/portfolio/better-plan/
 ---
 

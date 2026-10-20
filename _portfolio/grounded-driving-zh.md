@@ -6,8 +6,8 @@ lang: zh
 order: 0.5
 featured: true
 venue: "研究项目 · 审稿中，2026"
-cover_image: /assets/images/portfolio/grounded-cover.jpg
-cover_alt: "数据集中的一帧：一盏信号灯和三位骑行者被标为决定车辆下一步动作的要素"
+cover_image: /assets/images/portfolio/grounded-banner.jpg
+cover_alt: "项目横幅：高速上的车辆被框出，规划路线画在路面上，旁边是把被定位的物体连到推理的示意图标"
 tags: [视觉语言模型, 自动驾驶, 数据集, 视觉定位]
 permalink: /zh/portfolio/grounded-driving/
 ---
@@ -74,6 +74,20 @@ permalink: /zh/portfolio/grounded-driving/
 ## 结果
 
 我们用这套方法微调了八个开源视觉语言模型，从通用模型到专为驾驶打造的模型都有。方向是一致的。
+
+下面是其中一个用这个数据集训练出来的模型，在两段真实驾驶记录上逐帧跑出来的结果。画面上画的东西全部是模型自己的输出。带编号的圆圈是它的 grounding：它认为会影响决策的要素，以及它们在画面里的位置。编号来自它的推理，表示每个要素有多要紧，#1 最要紧。红线是它预测的轨迹，摄像头画面里画一遍，右上角的俯视图里再画一遍。
+
+<figure class="figure-wide">
+  <video class="project-video" controls muted loop playsinline preload="metadata" poster="/assets/images/portfolio/poster-grounded-pred-1.jpg">
+    <source src="/assets/video/grounded-pred-1.mp4" type="video/mp4">
+  </video>
+</figure>
+
+<figure class="figure-wide">
+  <video class="project-video" controls muted loop playsinline preload="none" poster="/assets/images/portfolio/poster-grounded-pred-2.jpg">
+    <source src="/assets/video/grounded-pred-2.mp4" type="video/mp4">
+  </video>
+</figure>
 
 提升最大的是"找出要紧的要素"：**召回率从 0.10–0.49 升到 0.62–0.79**，而且被找出的要素类型判断正确率达到 **90–98%**。由模型评分的解释质量平均提高约 **0.36**（满分 1），驾驶理由提高约 **0.31**。
 
