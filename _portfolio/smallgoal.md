@@ -7,7 +7,7 @@ order: 0.6
 featured: true
 venue: "Side project · Personal finance app, 2026"
 tags: [FastAPI, React, SQLite, PWA, Plaid]
-cover_image: /assets/images/portfolio/smallgoal-cover.jpg
+cover_image: /assets/images/portfolio/smallgoal-cover-en.jpg
 cover_alt: "SmallGoal's monthly overview on a desktop and a phone: spending, income, net and savings rate, spending by category, cumulative spending and a six-month trend"
 ---
 
@@ -16,7 +16,7 @@ I wanted to see where my money goes each month without handing my bank data to y
 ## What it does
 
 <figure class="figure-wide">
-  <img src="/assets/images/portfolio/smallgoal-phones.jpg" alt="Three phone screens: the monthly overview, the review queue asking what a transfer was for, and the transaction list">
+  <img src="/assets/images/portfolio/smallgoal-phones-en.jpg" alt="Three phone screens: the monthly overview, the review queue asking what a transfer was for, and the transaction list">
 </figure>
 
 Transactions come in two ways. I can upload the CSV a bank lets you download; Chase, Amex, Discover, Capital One, Citi, Bank of America and Wells Fargo are recognized, and other banks are matched by their column headers. Or I connect an account once through Plaid and it syncs by itself, catching up on whatever happened while the laptop was off and then checking every three hours.
@@ -29,7 +29,7 @@ When it isn't sure, it asks. Zelle and Venmo transfers, charges it can't categor
 
 The monthly overview shows spending, income, net and savings rate against last month, spending by category, a running total against the same point last month, the last six months, top merchants and a per-account breakdown. On the phone it's an installable web app, reachable over home Wi-Fi with an access token or from anywhere through Tailscale.
 
-The screenshots use the app's built-in demo data, not my accounts.
+The screenshots use the app's built-in demo data, not my accounts. The app itself is in Chinese; the interface text in these screenshots has been translated for this page.
 
 ## How it's built
 
